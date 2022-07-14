@@ -133,13 +133,13 @@ for i in range(3):
 ### nested functions over helper functions
 - not as readable, but less memory (since not referencing the class)
 ``` python
-class Solution
+class Solution:
   def do(self):
     def helper():
       return
     return helper
 
-# instead of
+# instead of...
 
 class Solution:
   def helper(self):
