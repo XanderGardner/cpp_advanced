@@ -99,6 +99,14 @@ def dfs(graph, visited, node):  #function for dfs
             dfs(visited, graph, neighbour)
 ```
 ``` python
+def preorder(root):
+  return [root.val] + preorder(root.left) + preorder(root.right) if root else []
+def inorder(root):
+  return  inorder(root.left) + [root.val] + inorder(root.right) if root else []
+def postorder(root):
+  return  postorder(root.left) + postorder(root.right) + [root.val] if root else []
+```
+``` python
 # Using a Python dictionary to act as an adjacency list
 graph = {
   '5' : ['3','7'],
@@ -113,3 +121,29 @@ dfs(graph, visited, '5')
 ```
 
 ## Techniques
+
+### xrange
+- xrange is a smaller object than range. Better if using for simple numerical loops
+``` python
+for i in xrange(3):
+# instead of...
+for i in range(3):
+```
+
+### nested functions over helper functions
+- not as readable, but less memory (since not referencing the class)
+``` python
+class Solution
+  def do(self):
+    def helper():
+      return
+    return helper
+
+# instead of
+
+class Solution:
+  def helper(self):
+    return
+  def do(self):
+    return self.helper
+```
