@@ -81,7 +81,10 @@ a = np.array([2,3])
 - sequence of integers
 - integers are byte size: 0 <= x <= 255
 ``` python
-
+a = bytearray((23,4,3))
+b = bytearray((3,))
+a[2] # returns integer
+a.append(30)
 ```
 
 ## Algorithms
