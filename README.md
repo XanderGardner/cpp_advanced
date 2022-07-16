@@ -1,7 +1,7 @@
 # *Python Cheat Sheet*
 
 ## Table of Contents
-[Data Structures](#data-structures)
+[Data Structures Built-in](#data-structures-built-in)
 1. [list](#list)
 1. [tuple](#tuple)
 1. [set](#set)
@@ -11,15 +11,26 @@
 1. [numpy.ndarray](#numpy.ndarray)
 1. [bytearray](#bytearray)
 
+[Data Structures to Import](#data-structures-to-import)
+1. [queue](#queue)
+1. [deque](#deque)
+1. [heapq](#heapq)
+
+[Data Structures to Implement](#data-structures-to-implement)
+1. [stack](#stack)
+1. [linkedlist](#linkedlist)
+
 [Algorithms](#algorithms)
 1. [DFS](#dfs)
 
 [Techniques](#techniques)
 
-## Data Structures
+## Data Structures Built-in
+
 ### list
 - indexed collection of data
 - inset/deleting at front requires shifting
+- can use as a stack
 ``` python
 a = [1,2]
 a += [3]
@@ -87,7 +98,66 @@ a[2] # returns integer
 a.append(30)
 ```
 
+## Data Structures to Import
+
+### queue
+- FIFO (oldest out)
+``` python
+from queue import Queue
+a = Queue()
+a.put(1)
+a.get()
+```
+
+### deque
+- remove either end in O(1)
+``` python
+from collections import deque
+a = deque()
+a.append(1) # appends right
+a.popleft()
+a.pop() # pops right
+```
+
+### heapq
+- algorithm when used with list to make a priority queue
+- this is a min-heap. to use a max-heap easily, make vals negative
+``` python
+import heapq
+a = [1,3,4,5]
+heapq.heapify(a)
+heapq.heappush(a, 6)
+heapq.heappop(a)
+```
+- use tuples to sort based on index 0
+``` python
+a = [(1, "a"), (5, "d")]
+heapq.heapify(a)
+```
+
+## Data Structures to Implement
+
+### stack
+- just use a list
+``` python
+a = []
+a += [1]
+a.pop()
+```
+### linkedlist
+- make a simple Node class
+``` python
+class Node:
+  def __init__(self, val):
+    self.val = val
+    self.next = None
+```
+```
+root = Node(2)
+```
+
 ## Algorithms
+
 ### DFS
 
 ``` python
@@ -122,14 +192,6 @@ dfs(graph, visited, '5')
 
 ## Techniques
 
-### xrange
-- xrange is a smaller object than range. Better if using for simple numerical loops
-``` python
-for i in xrange(3):
-# instead of...
-for i in range(3):
-```
-
 ### nested functions over helper functions
 - not as readable, but less memory (since not referencing the class)
 ``` python
@@ -146,4 +208,17 @@ class Solution:
     return
   def do(self):
     return self.helper
+```
+
+### enumerate
+- simplifies loops needing value and index
+``` python
+for index, value in enumerate(values):
+```
+
+### comparing objects
+- just define this function
+``` python
+def __lt__(self, other):
+  return self.intAttribute < other.intAttribute
 ```
