@@ -19,9 +19,14 @@
 [Data Structures to Implement](#data-structures-to-implement)
 1. [stack](#stack)
 1. [linkedlist](#linkedlist)
+1. [graph](#graph)
 
 [Algorithms](#algorithms)
 1. [DFS](#dfs)
+1. [BFS](#bfs)
+1. [Dynamic Programming](#dynamic-programming)
+1. [Searching](#searching)
+1. [Sorting](#sorting)
 
 [Techniques](#techniques)
 
@@ -152,14 +157,36 @@ class Node:
     self.val = val
     self.next = None
 ```
-```
+``` python
 root = Node(2)
+```
+
+### graph
+- use dict to act as an adjacency list
+``` python
+a = {
+  '5' : ['3','7'],
+  '3' : ['2', '4'],
+  '7' : ['8'],
+  '2' : [],
+  '4' : ['8'],
+  '8' : []
+}
 ```
 
 ## Algorithms
 
 ### DFS
-
+- for trees (recursive)
+``` python
+def preorder(root):
+  return [root.val] + preorder(root.left) + preorder(root.right) if root else []
+def inorder(root):
+  return  inorder(root.left) + [root.val] + inorder(root.right) if root else []
+def postorder(root):
+  return  postorder(root.left) + postorder(root.right) + [root.val] if root else []
+```
+- for graphs, must track visited bc of cycles (recursive)
 ``` python
 def dfs(graph, visited, node):  #function for dfs 
     if node not in visited:
@@ -169,15 +196,6 @@ def dfs(graph, visited, node):  #function for dfs
             dfs(visited, graph, neighbour)
 ```
 ``` python
-def preorder(root):
-  return [root.val] + preorder(root.left) + preorder(root.right) if root else []
-def inorder(root):
-  return  inorder(root.left) + [root.val] + inorder(root.right) if root else []
-def postorder(root):
-  return  postorder(root.left) + postorder(root.right) + [root.val] if root else []
-```
-``` python
-# Using a Python dictionary to act as an adjacency list
 graph = {
   '5' : ['3','7'],
   '3' : ['2', '4'],
@@ -186,8 +204,76 @@ graph = {
   '4' : ['8'],
   '8' : []
 }
-visited = set() # Set to keep track of visited nodes of graph.
+visited = set() # Set to keep track of visited nodes of graph (bc of graph cycles)
 dfs(graph, visited, '5')
+```
+
+### BFS
+- for graphs, must track visited bc of cycles (uses queue)
+- starts from a certain node, s (all nodes labeled 0, 1...)
+``` python
+def BFS(self, s):
+  visited = [False] * (len(self.graph))
+  queue = []
+
+  # start at source
+  queue.append(s)
+  visited[s] = True
+
+  while queue:
+    s = queue.pop(0)
+    print (s, end = " ")
+
+    # go through neighbors
+    for i in self.graph[s]:
+      if visited[i] == False:
+        queue.append(i)
+        visited[i] = True
+```
+
+### Dynamic Programming
+
+- recursion with memoization
+``` python
+memo = {}
+def factorial(n):
+  if n == 1:
+    return 1
+  elif n >= 2:
+    mem[n] = n * factorial(n-1)
+    return memo[n]
+```
+
+### Searching
+- linear search: check left to right
+- binary search: recursive on sorted array
+``` python
+import bisect
+def search(self, nums, target):
+  index = bisect.bisect_left(nums, target)
+  return index if index < len(nums) and nums[index] == target else -1
+```
+
+### Sorting
+- Selection: repeatedly find smallest w/ linear search
+- Insertion: move next element into left part that is sorted
+- Merge: recursive breakdown and then merge lists back up
+- Quick: partition about element, recurse on left and right sides
+- Python uses Tim (combo of insertion and merge)
+
+``` python
+def sortCmp(e):
+  return len(e)
+  
+a = ['ab', 'a', 'df', 'sdf']
+
+# sort mutates (default ascending (False))
+a.sort()
+a.sort(reverse=True, key=sortCmp)
+
+# sorted doesn't mutate (default ascending (False))
+b = sorted(a)
+b = sorted(a, key=sortCmp, reverse=True)
 ```
 
 ## Techniques
