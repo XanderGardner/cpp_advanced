@@ -59,6 +59,7 @@ a[1]
 a = set([2,1,3])
 print(1 in set)
 a.add(4)
+a.remove(4)
 ```
 
 ### frozenset
