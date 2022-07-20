@@ -254,6 +254,20 @@ def search(self, nums, target):
   index = bisect.bisect_left(nums, target)
   return index if index < len(nums) and nums[index] == target else -1
 ```
+``` python 
+# returns index of x in arr if present, else -1
+def binary_search(arr, low, high, x):
+    if high < low:
+      return -1 # element not present
+    
+    mid = (high + low) // 2
+    if arr[mid] == x:
+        return mid
+    elif arr[mid] > x:
+        return binary_search(arr, low, mid - 1, x)
+    else:
+        return binary_search(arr, mid + 1, high, x)
+```
 
 ### Sorting
 - Selection: repeatedly find smallest w/ linear search
