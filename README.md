@@ -309,3 +309,6 @@ for index, value in enumerate(values):
 def __lt__(self, other):
   return self.intAttribute < other.intAttribute
 ```
+
+### TODO: Add Info
+- https://dev.to/codespent/understanding-map-filter-and-zip-in-python-3ifn
