@@ -15,6 +15,7 @@
 1. [queue](#queue)
 1. [deque](#deque)
 1. [heapq](#heapq)
+1. [SortedList](#sortedlist)
 
 [Data Structures to Implement](#data-structures-to-implement)
 1. [stack](#stack)
@@ -139,6 +140,23 @@ heapq.heappop(a)
 ``` python
 a = [(1, "a"), (5, "d")]
 heapq.heapify(a)
+```
+
+### SortedList
+- maintains a sorted list
+- nlogn creation
+- logn adding and removing
+``` python
+from sortedcontainers import SortedList
+a = SortedList([1, 5, 4])
+a.add(2)
+a.remove(5) # a.discard(5) for not throwing error if not present
+a.pop(2) # default will pop -1 (last element)
+
+a.bisect_left(5) # gets index of where you would insert 5
+# [1,3,5,5,6] bisect_left is 2, bisect_right is 4 based on same elements present
+a.count(5)
+a.index(5)
 ```
 
 ## Data Structures to Implement
