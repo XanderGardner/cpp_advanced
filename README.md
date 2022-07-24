@@ -344,3 +344,5 @@ def __lt__(self, other):
 
 ### TODO: Add Info
 - https://dev.to/codespent/understanding-map-filter-and-zip-in-python-3ifn
+- https://www.geeksforgeeks.org/python-star-or-asterisk-operator/
+- https://www.geeksforgeeks.org/defaultdict-in-python/
