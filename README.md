@@ -348,3 +348,4 @@ def __lt__(self, other):
 - https://www.geeksforgeeks.org/python-star-or-asterisk-operator/
 - https://www.geeksforgeeks.org/defaultdict-in-python/
 - defaultdict
+- counter (type of dict, .values() method)
