@@ -87,6 +87,7 @@ a = {"a":2, "h":5}
 a["b"] = 3
 print("a" in a)
 a["a"]
+del a["a"] # or a.pop("a") which also gets item
 ```
 
 ### numpy.ndarray
@@ -346,3 +347,4 @@ def __lt__(self, other):
 - https://dev.to/codespent/understanding-map-filter-and-zip-in-python-3ifn
 - https://www.geeksforgeeks.org/python-star-or-asterisk-operator/
 - https://www.geeksforgeeks.org/defaultdict-in-python/
+- defaultdict
