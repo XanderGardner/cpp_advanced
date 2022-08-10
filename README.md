@@ -188,6 +188,11 @@ from collections import Counter
 a = Counter("hello")
 # {"h":1, "e":1, "l":2, "o":1"}
 ```
+```
+# useful trick
+a = Counter([1, 3, 4, 1, 2, 1, 1, 3, 4, 3, 5, 1, 2, 5, 3, 4, 5])
+b = counter.most_common(3) # [(1, 5), (3, 4), (4, 3)]
+```
 
 
 ## Data Structures to Implement
