@@ -24,6 +24,7 @@
 1. [graph](#graph)
 
 [Algorithms](#algorithms)
+1. [Bit Operations](#bit-operations)
 1. [DFS](#dfs)
 1. [BFS](#bfs)
 1. [Dynamic Programming](#dynamic-programming)
@@ -34,9 +35,15 @@
 1. [Nested Functions](#nested-functions)
 1. [Enumerate](#enumerate)
 1. [Comparing Objects](#comparing-objects)
+1. [Map Function](#map-function)
+1. [Filter Function](#filter-function)
+1. [Zip Function](#zip-function)
 
 [Non-competitive](#non-competitive)
-1. [numpy.ndarray](#numpy.ndarray)
+1. [numpy](#numpy)
+1. [pandas](#pandas)
+
+[TODO](#todo)
 
 ## Data Structures Built-in
 
@@ -96,8 +103,8 @@ print("a" in a)
 a["a"]
 del a["a"] # or a.pop("a") which also gets item
 
-a.keys() # array like object
-a.values() # array like object
+a.keys() # returns iterable
+a.values() # returns iterable
 for key, value in a.items():
 ```
 
@@ -218,6 +225,8 @@ a = {
 ```
 
 ## Algorithms
+
+### Bit Operations
 
 ### DFS
 - for trees (recursive)
@@ -366,18 +375,38 @@ def __lt__(self, other):
   return self.intAttribute < other.intAttribute
 ```
 
+### Map Function
+- given function and iterable, returns iterable (map object) with all items run through the function
+```
+def squ(n):
+  return n ** 2
+map(squ, [1,3,2]) # [1,9,4]
+```
+
+### Filter Function
+- given function (that returns a boolean) and iterable, returns iterable (filter object) with only items that cause the given function to return True
+```
+def odd(n):
+  return bool(n%2)
+filter(odd, [1,2,3,4]) # [1,3]
+```
+
+### Zip Function
+- given any number of iterables of equal length, returns iterable (zip object) of tuples (grouping items of the same index)
+```
+zip([1,2,3],[4,5,6],[7,8,9]) # [(1,4,7),(2,5,8),(3,6,9)]
+```
+
 ## Non-competitive
 
-### numpy.ndarray
+### numpy
 - uses numpy `import numpy as np`
 ```
 a = np.array([2,3])
 ```
 
-### TODO: Add Info
-- https://dev.to/codespent/understanding-map-filter-and-zip-in-python-3ifn
-- https://www.geeksforgeeks.org/python-star-or-asterisk-operator/
-- https://www.geeksforgeeks.org/defaultdict-in-python/
-- defaultdict
-- counter (type of dict, .values() method)
-- bit operationsdefault 
+### pandas
+
+## TODO
+- bitoperations
+- pandas
