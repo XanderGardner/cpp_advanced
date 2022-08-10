@@ -175,9 +175,9 @@ a["d"] += 1 # a["d"] is now 2
 ```
 
 ### Counter
-from collections import Counter
 - dict where values are the counted number of times the key appears
 ```
+from collections import Counter
 a = Counter("hello")
 # {"h":1, "e":1, "l":2, "o":1"}
 ```
