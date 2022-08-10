@@ -8,7 +8,6 @@
 1. [frozenset](#frozenset)
 1. [str](#str)
 1. [dict](#dict)
-1. [numpy.ndarray](#numpy.ndarray)
 1. [bytearray](#bytearray)
 
 [Data Structures to Import](#data-structures-to-import)
@@ -16,6 +15,8 @@
 1. [deque](#deque)
 1. [heapq](#heapq)
 1. [SortedList](#sortedlist)
+1. [defaultdict](#defaultdict)
+1. [Counter](#counter)
 
 [Data Structures to Implement](#data-structures-to-implement)
 1. [stack](#stack)
@@ -30,6 +31,12 @@
 1. [Sorting](#sorting)
 
 [Techniques](#techniques)
+1. [Nested Functions](#nested-functions)
+1. [Enumerate](#enumerate)
+1. [Comparing Objects](#comparing-objects)
+
+[Non-competitive](#non-competitive)
+1. [numpy.ndarray](#numpy.ndarray)
 
 ## Data Structures Built-in
 
@@ -88,12 +95,10 @@ a["b"] = 3
 print("a" in a)
 a["a"]
 del a["a"] # or a.pop("a") which also gets item
-```
 
-### numpy.ndarray
-- uses numpy `import numpy as np`
-```
-a = np.array([2,3])
+a.keys() # array like object
+a.values() # array like object
+for key, value in a.items():
 ```
 
 ### bytearray
@@ -159,6 +164,24 @@ a.bisect_left(5) # gets index of where you would insert 5
 a.count(5)
 a.index(5)
 ```
+
+### defaultdict
+- dict but accessing unknown key creates the key with a default value instead of erroring
+```
+from collections import defaultdict
+
+a = defaultdict(lambda: 1)
+a["d"] += 1 # a["d"] is now 2
+```
+
+### Counter
+from collections import Counter
+- dict where values are the counted number of times the key appears
+```
+a = Counter("hello")
+# {"h":1, "e":1, "l":2, "o":1"}
+```
+
 
 ## Data Structures to Implement
 
@@ -312,7 +335,7 @@ b = sorted(a, key=sortCmp, reverse=True)
 
 ## Techniques
 
-### nested functions over helper functions
+### Nested Functions
 - not as readable, but less memory (since not referencing the class)
 ``` python
 class Solution:
@@ -321,7 +344,7 @@ class Solution:
       return
     return helper
 
-# instead of...
+# instead of helper functions...
 
 class Solution:
   def helper(self):
@@ -330,17 +353,25 @@ class Solution:
     return self.helper
 ```
 
-### enumerate
+### Enumerate
 - simplifies loops needing value and index
 ``` python
 for index, value in enumerate(values):
 ```
 
-### comparing objects
+### Comparing Objects
 - just define this function
 ``` python
 def __lt__(self, other):
   return self.intAttribute < other.intAttribute
+```
+
+## Non-competitive
+
+### numpy.ndarray
+- uses numpy `import numpy as np`
+```
+a = np.array([2,3])
 ```
 
 ### TODO: Add Info
@@ -349,3 +380,4 @@ def __lt__(self, other):
 - https://www.geeksforgeeks.org/defaultdict-in-python/
 - defaultdict
 - counter (type of dict, .values() method)
+- bit operationsdefault 
