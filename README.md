@@ -414,4 +414,4 @@ a = np.array([2,3])
 
 ## TODO
 - bitoperations
-- pandas
+- https://www.geeksforgeeks.org/number-subarrays-sum-exactly-equal-k/
