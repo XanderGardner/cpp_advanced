@@ -1,6 +1,5 @@
-# *Python Cheat Sheet*
+# Table of Contents
 
-## Table of Contents
 [Data Structures Built-in](#data-structures-built-in)
 1. [list](#list)
 1. [tuple](#tuple)
@@ -39,13 +38,24 @@
 1. [Filter Function](#filter-function)
 1. [Zip Function](#zip-function)
 
-[Non-competitive](#non-competitive)
-1. [numpy](#numpy)
-1. [pandas](#pandas)
+[pandas](#pandas)
+1. [create](#create)
+1. [output](#output)
+1. [read](#read)
+1. [update](#update)
+
+[numpy](#numpy)
+
+[plt](#plt)
+
+[webscraping](#webscraping)
+1. [selenium](#selenium)
+1. [threading](#threading)
+1. [pyinstaller](#pyinstaller)
 
 [TODO](#todo)
 
-## Data Structures Built-in
+# Data Structures Built-in
 
 ### list
 - indexed collection of data
@@ -118,7 +128,7 @@ a[2] # returns integer
 a.append(30)
 ```
 
-## Data Structures to Import
+# Data Structures to Import
 
 ### queue
 - FIFO (oldest out)
@@ -195,7 +205,7 @@ b = counter.most_common(3) # [(1, 5), (3, 4), (4, 3)]
 ```
 
 
-## Data Structures to Implement
+# Data Structures to Implement
 
 ### stack
 - just use a list
@@ -229,9 +239,10 @@ a = {
 }
 ```
 
-## Algorithms
+# Algorithms
 
 ### Bit Operations
+- TODO
 
 ### DFS
 - for trees (recursive)
@@ -347,7 +358,7 @@ b = sorted(a)
 b = sorted(a, key=sortCmp, reverse=True)
 ```
 
-## Techniques
+# Techniques
 
 ### Nested Functions
 - not as readable, but less memory (since not referencing the class)
@@ -402,16 +413,232 @@ filter(odd, [1,2,3,4]) # [1,3]
 zip([1,2,3],[4,5,6],[7,8,9]) # [(1,4,7),(2,5,8),(3,6,9)]
 ```
 
-## Non-competitive
+# pandas
 
-### numpy
+- import
+``` python
+import pandas as pd
+```
+### create
+- dataframe
+- main structure for holding data in a table
+``` python
+df = pd.read_csv('data.csv') # read from csv
+df = pd.DataFrame.from_dict(dict) # read from dict (keys are col names)
+
+# or read from sqlite3
+import sqlite3
+con = sqlite3.connect("ssdfd.sqlite")
+df = pd.read_sql_query("SELECT * FROM tablename", con)
+```
+### output
+
+- plotting line (no plt)
+```
+df.plot.line('TIME', "SIZE")
+```
+
+- get dict
+``` python
+df.to_dict('index')
+# {'row1': {'col1': 1, 'col2': 0.5}, 'row2': {'col1': 2, 'col2': 0.75}}
+```
+
+- get numpy array (if all numbers)
+- otherwise numpy array will have some objects and stuff
+``` python
+a = df.to_numpy()
+```
+
+### read
+
+- metadata
+``` python
+df.columns # array of col names
+df.dtypes # array of data types
+```
+
+- access
+``` python
+df['colname'] # one col
+df[['colname1', 'colname2']] # multiple cols
+```
+
+- conditional access
+``` python
+df[df['longitude'] == -119.7]
+df[(df['longitude'] == -119.7) & (df['longitude'] == -119.7)]
+```
+
+- specific access
+``` python
+df.iloc[14] # get row
+df.iloc[14,1] # get row, col
+df.iloc[22:25] # multiple rows
+```
+
+### update
+
+- adding data
+``` python
+df['New Column'] = df['latitude'] + df['longitude']
+df['new col'] = df['longitude'].apply(lambda x : 1 if x==-122.05 else 0)
+```
+
+- sort rows by a columns values
+```
+df = df.sort_values(by=['TIME'])
+```
+
+# plt
+
+- import
+``` python
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas_datareader as pdr
+import seaborn as sb
+import datetime as dt
+```
+
+- plotting
+``` python
+plt.scatter(x=df['new col'], y=df['longitude'])
+```
+
+- trend line
+``` python
+reg = np.polyfit(df['new col'], df['longitude'], deg = 1) # slope, intercept
+trend = np.polyval(reg, df['new col'])
+plt.scatter(x=df['new col'], y=df['longitude'])
+plt.plot(df["new col"], trend, 'r')
+```
+
+# numpy
 - uses numpy `import numpy as np`
 ```
 a = np.array([2,3])
 ```
 
-### pandas
+# webscraping
+Done best with
+- Selenium - browser automation software
+- WebDriver - explains Chrome to Selenium (ChromeDriver)
+- Chrome - A web browser
+- Webdriver-manager - managing different chromes on different computer
+<p>
+getting data online with apis: https://towardsdatascience.com/json-and-apis-with-python-fba329ef6ef0
+</p>
+See example webscraping for google in `google_search.py`
 
-## TODO
+### selenium
+- Selenium is browser automation software
+- Use selenium version 4 (latest) or older to work properly with the WebDriver manager
+```
+pip install selenium
+```
+
+The version of Chrome on each persons computer is different, so we need to automatically change the WebDriver
+using a WebDriver manager.
+
+```
+pip install webdriver-manager
+```
+
+``` python
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+
+driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+```
+
+- using the WebDriver
+``` python
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+import time
+
+chrome_options = Options()
+chrome_options.add_argument("--headless") # might get bot detected if added
+driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
+driver.get("https://www.google.com/robots.txt")
+
+dom_text = None
+try:
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located(
+        (By.TAG_NAME, "body")
+    ))
+    time.sleep(1.0) # if need extra time to wait for javascript
+    
+    main_element = driver.find_element(by=By.TAG_NAME, value="body")
+    dom_text = main_element.text
+finally:
+    driver.close()
+    driver.quit()
+print(dom_text)
+```
+
+### threading
+- Increase efficiency by running multiple tasks, others can run while others are waiting for the page to load
+- Note the function in the thread cannot return anything, so must make changes through pointer parameters
+
+``` python
+from threading import Thread
+
+# task function
+def scrape_task(address, array):
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
+    driver.get(address)
+
+    dom_text = None
+    try:
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located(
+            (By.TAG_NAME, "body")
+        ))
+        time.sleep(1.0) # if need extra time to wait for javascript
+        
+        main_element = driver.find_element(by=By.TAG_NAME, value="body")
+        dom_text = main_element.text
+    finally:
+        driver.close()
+        driver.quit()
+    
+    array += [dom_text]
+
+# run the tasks in threads
+array = []
+threads = [None] * 3
+threads[0] = Thread(target=scrape_task, args=(f"https://google.com/robots.txt", array))
+threads[1] = Thread(target=scrape_task, args=(f"https://google.com/robots.txt", array))
+threads[2] = Thread(target=scrape_task, args=(f"https://google.com/robots.txt", array))
+for i in range(len(threads)):
+    threads[i].start() # start running the function
+for i in range(len(threads)):
+    threads[i].join() # don't continue until all the threads are complete
+
+```
+
+### pyinstaller
+- For creating an executable file for Windows
+
+```
+pip install -U pyinstaller
+```
+
+Create the executable
+```
+pyinstaller ./main.py --onefile
+```
+If adding a specific chromedriver (but you should be using the manager above)
+```
+pyinstaller ./main.py --onefile --add-binary "./chromedriver_win32/chromedriver.exe;./chromedriver_win32"
+```
+
+# TODO
 - bitoperations
 - https://www.geeksforgeeks.org/number-subarrays-sum-exactly-equal-k/
