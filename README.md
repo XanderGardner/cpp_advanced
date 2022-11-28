@@ -450,6 +450,12 @@ df.to_dict('index')
 a = df.to_numpy()
 ```
 
+- get column as list
+``` python
+a['colname'].tolist()
+```
+
+
 ### read
 
 - metadata
