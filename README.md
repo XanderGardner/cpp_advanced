@@ -500,25 +500,22 @@ df = df.sort_values(by=['TIME'])
 
 - import
 ``` python
-import numpy as np
 import matplotlib.pyplot as plt
-import pandas_datareader as pdr
-import seaborn as sb
-import datetime as dt
 ```
 
 - plotting
+- `plot` or `scatter`
 ``` python
-plt.scatter(x=df['new col'], y=df['longitude'])
+plt.plot(alphas, num_occurances, label="num occurances")
+plt.plot(alphas, mean_returns, label="mean returns")
+plt.plot(alphas, total_returns, label="total returns")
+plt.plot(alphas, variance_returns, label="variance returns")
+plt.legend()
+plt.title("metrics vs alpha")
+plt.xlabel("alpha")
+plt.ylabel("metric")
 ```
 
-- trend line
-``` python
-reg = np.polyfit(df['new col'], df['longitude'], deg = 1) # slope, intercept
-trend = np.polyval(reg, df['new col'])
-plt.scatter(x=df['new col'], y=df['longitude'])
-plt.plot(df["new col"], trend, 'r')
-```
 
 # numpy
 - uses numpy `import numpy as np`
