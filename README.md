@@ -460,7 +460,8 @@ a['colname'].tolist()
 
 - metadata
 ``` python
-df.columns # array of col names
+df.columns # array of col names (can set these)
+df.index # array of row names (can set these)
 df.dtypes # array of data types
 ```
 
