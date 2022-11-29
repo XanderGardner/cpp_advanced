@@ -53,6 +53,9 @@
 1. [threading](#threading)
 1. [pyinstaller](#pyinstaller)
 
+[conda](#conda)
+
+
 [TODO](#todo)
 
 # Data Structures Built-in
@@ -642,6 +645,35 @@ If adding a specific chromedriver (but you should be using the manager above)
 ```
 pyinstaller ./main.py --onefile --add-binary "./chromedriver_win32/chromedriver.exe;./chromedriver_win32"
 ```
+
+# conda
+Create different environments which hold different packages. The "base" environment has everything
+
+- To create an environment, in terminal:
+```
+conda create --name env_name
+```
+
+- To enter environment
+```
+conda activate env_name
+```
+
+- To see list of environment names
+```
+conda env list
+```
+
+- To see list of packages in current environment
+```
+conda list
+```
+
+- To install package in current environment
+```
+conda install pandas
+```
+
 
 # TODO
 - bitoperations
