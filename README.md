@@ -442,6 +442,12 @@ df.plot.line('TIME', "SIZE") # line
 df['colname'].hist() # histogram
 plt.scatter(x=df['col1'], y=df['col2'], alpha=0.1) # density plot
 ```
+setting title, xlabel with axes
+```
+ax = df['colname'].hist()
+ax.set_xlabel("xlabel")
+ax.set_title("title")
+```
 
 - get dict
 ``` python
