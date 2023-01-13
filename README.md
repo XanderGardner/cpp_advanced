@@ -436,9 +436,11 @@ df = pd.read_sql_query("SELECT * FROM tablename", con)
 ```
 ### output
 
-- plotting line (no plt)
+- plotting
 ```
-df.plot.line('TIME', "SIZE")
+df.plot.line('TIME', "SIZE") # line
+df['colname'].hist() # histogram
+plt.scatter(x=df['col1'], y=df['col2'], alpha=0.1) # density plot
 ```
 
 - get dict
@@ -652,6 +654,10 @@ Create different environments which hold different packages. The "base" environm
 - To create an environment, in terminal:
 ```
 conda create --name env_name
+```
+set python version
+```
+conda install python=3.5.0
 ```
 
 - To enter environment
