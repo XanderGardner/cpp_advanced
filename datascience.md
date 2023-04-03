@@ -1,7 +1,5 @@
 # Table of Contents
-- [Main](README.md)
-- [Webscraping](webscraping.md)
-- [Data Science](datascience.md)
+- [Back to Main](README.md)
 
 [pandas](#pandas)
 1. [create](#create)
