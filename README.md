@@ -1,5 +1,8 @@
 # Table of Contents
 
+[Main](#README.md)
+[Webscraping](#webscraping.md)
+
 [Data Structures Built-in](#data-structures-built-in)
 1. [list](#list)
 1. [tuple](#tuple)
@@ -48,13 +51,7 @@
 
 [plt](#plt)
 
-[webscraping](#webscraping)
-1. [selenium](#selenium)
-1. [threading](#threading)
-1. [pyinstaller](#pyinstaller)
-
 [conda](#conda)
-
 
 [TODO](#todo)
 
@@ -535,125 +532,6 @@ plt.ylabel("metric")
 a = np.array([2,3])
 ```
 
-# webscraping
-Done best with
-- Selenium - browser automation software
-- WebDriver - explains Chrome to Selenium (ChromeDriver)
-- Chrome - A web browser
-- Webdriver-manager - managing different chromes on different computer
-<p>
-getting data online with apis: https://towardsdatascience.com/json-and-apis-with-python-fba329ef6ef0
-</p>
-See example webscraping for google in `google_search.py`
-
-### selenium
-- Selenium is browser automation software
-- Use selenium version 4 (latest) or older to work properly with the WebDriver manager
-```
-pip install selenium
-```
-
-The version of Chrome on each persons computer is different, so we need to automatically change the WebDriver
-using a WebDriver manager.
-
-```
-pip install webdriver-manager
-```
-
-``` python
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
-from webdriver_manager.chrome import ChromeDriverManager
-
-driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-```
-
-- using the WebDriver
-``` python
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-import time
-
-chrome_options = Options()
-chrome_options.add_argument("--headless") # might get bot detected if added
-driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
-driver.get("https://www.google.com/robots.txt")
-
-dom_text = None
-try:
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located(
-        (By.TAG_NAME, "body")
-    ))
-    time.sleep(1.0) # if need extra time to wait for javascript
-    
-    main_element = driver.find_element(by=By.TAG_NAME, value="body")
-    dom_text = main_element.text
-finally:
-    driver.close()
-    driver.quit()
-print(dom_text)
-```
-
-### threading
-- Increase efficiency by running multiple tasks, others can run while others are waiting for the page to load
-- Note the function in the thread cannot return anything, so must make changes through pointer parameters
-
-``` python
-from threading import Thread
-
-# task function
-def scrape_task(address, array):
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
-    driver.get(address)
-
-    dom_text = None
-    try:
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located(
-            (By.TAG_NAME, "body")
-        ))
-        time.sleep(1.0) # if need extra time to wait for javascript
-        
-        main_element = driver.find_element(by=By.TAG_NAME, value="body")
-        dom_text = main_element.text
-    finally:
-        driver.close()
-        driver.quit()
-    
-    array += [dom_text]
-
-# run the tasks in threads
-array = []
-threads = [None] * 3
-threads[0] = Thread(target=scrape_task, args=(f"https://google.com/robots.txt", array))
-threads[1] = Thread(target=scrape_task, args=(f"https://google.com/robots.txt", array))
-threads[2] = Thread(target=scrape_task, args=(f"https://google.com/robots.txt", array))
-for i in range(len(threads)):
-    threads[i].start() # start running the function
-for i in range(len(threads)):
-    threads[i].join() # don't continue until all the threads are complete
-
-```
-
-### pyinstaller
-- For creating an executable file for Windows
-
-```
-pip install -U pyinstaller
-```
-
-Create the executable
-```
-pyinstaller ./main.py --onefile
-```
-If adding a specific chromedriver (but you should be using the manager above)
-```
-pyinstaller ./main.py --onefile --add-binary "./chromedriver_win32/chromedriver.exe;./chromedriver_win32"
-```
-
 # conda
 Create different environments which hold different packages. The "base" environment has everything
 
@@ -685,7 +563,6 @@ conda list
 ```
 conda install pandas
 ```
-
 
 # TODO
 - bitoperations
