@@ -1,7 +1,6 @@
 # Table of Contents
-
-[Main](#README.md)
-[Webscraping](#webscraping.md)
+- [Main](#README.md)
+- [Webscraping](#webscraping.md)
 
 [Data Structures Built-in](#data-structures-built-in)
 1. [list](#list)

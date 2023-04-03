@@ -1,6 +1,5 @@
-
-[Main](#README.md)
-[Webscraping](#webscraping.md)
+- [Main](#README.md)
+- [Webscraping](#webscraping.md)
 
 [Webscraping](#webscraping)
 1. [selenium](#selenium)
