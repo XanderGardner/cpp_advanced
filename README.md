@@ -3,6 +3,7 @@
 - [Webscraping](webscraping.md)
 - [Data Science](datascience.md)
 - [Web Dev](webdev.md)
+- [Conda](conda.md)
 
 [Data Structures Built-in](#data-structures-built-in)
 1. [list](#list)
@@ -45,8 +46,6 @@
 
 [Math](#math)
 1. [Sum Sequence](#sum-sequence)
-
-[conda](#conda)
 
 [TODO](#todo)
 
@@ -459,38 +458,6 @@ zip([1,2,3],[4,5,6],[7,8,9]) # [(1,4,7),(2,5,8),(3,6,9)]
   - n = 30
   - a = 20
   - d = 5
-
-# conda
-Create different environments which hold different packages. The "base" environment has everything
-
-- To create an environment, in terminal:
-```
-conda create --name env_name
-```
-set python version
-```
-conda install python=3.5.0
-```
-
-- To enter environment
-```
-conda activate env_name
-```
-
-- To see list of environment names
-```
-conda env list
-```
-
-- To see list of packages in current environment
-```
-conda list
-```
-
-- To install package in current environment
-```
-conda install pandas
-```
 
 # TODO
 - bitoperations
