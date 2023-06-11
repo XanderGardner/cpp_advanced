@@ -42,6 +42,9 @@
 1. [Filter Function](#filter-function)
 1. [Zip Function](#zip-function)
 
+[Math](#math)
+1. [Sum Sequence](#sum-sequence)
+
 [conda](#conda)
 
 [TODO](#todo)
@@ -54,6 +57,7 @@
 - can use as a stack
 ``` python
 a = [1,2]
+a = [[0] for _ in range(5)] # list of lists without self-referencing
 a += [3]
 a.index(2) # returns index of first instance of the value 2
 a.remove(2) # removes first instance of the value 2
@@ -403,6 +407,19 @@ filter(odd, [1,2,3,4]) # [1,3]
 ```
 zip([1,2,3],[4,5,6],[7,8,9]) # [(1,4,7),(2,5,8),(3,6,9)]
 ```
+
+# Math
+
+### Sum Sequence
+- n: number of numbers in sequence
+- a: first number in sequence
+- d: difference between numbers
+- sum = na + dn(n-1)/2
+- Example:
+  - 20+25+...+ (30 numbers in total)
+  - n = 30
+  - a = 20
+  - d = 5
 
 # conda
 Create different environments which hold different packages. The "base" environment has everything
