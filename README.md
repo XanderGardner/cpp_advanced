@@ -25,6 +25,7 @@
 1. [stack](#stack)
 1. [linkedlist](#linkedlist)
 1. [graph](#graph)
+1. [segment tree](#segment-tree)
 
 [Algorithms](#algorithms)
 1. [Bit Operations](#bit-operations)
@@ -232,6 +233,44 @@ a = {
   '4' : ['8'],
   '8' : []
 }
+```
+
+### segment tree
+- usable update and query on ranges (can include max, min, sum, and more)
+``` python
+def update_st(self, st, i, new_val):
+    n = int(len(st)/2)
+    i += n
+    st[i] = new_val
+    i = int(i/2)
+    while i >= 1:
+        st[i] = max(st[2*i], st[2*i+1])
+        i = int(i/2)
+
+def query_st(self, st, i, j):
+    n = int(len(st)/2)
+    i += n
+    j += n
+    s = 0
+    while i <= j:
+        if (i%2 == 1):
+            s = max(s, st[i])
+            i += 1
+        if (j%2 == 0):
+            s = max(s, st[j])
+            j -= 1
+        i = int(i/2)
+        j = int(j/2)
+    return s
+
+def create_st(self, a):
+    n = pow(2,math.ceil(math.log2(len(a))))
+    st = [0] * (n*2)
+
+    for i in range(len(a)):
+        self.update_st(st, i, a[i])
+    return st
+
 ```
 
 # Algorithms
