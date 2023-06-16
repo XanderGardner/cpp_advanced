@@ -46,6 +46,7 @@
 
 [Math](#math)
 1. [Sum Sequence](#sum-sequence)
+1. [Combination](#combinations)
 
 [TODO](#todo)
 
@@ -220,6 +221,58 @@ class Node:
 ``` python
 root = Node(2)
 ```
+
+### binary search tree
+
+``` python
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, val):
+        if self.root is None:
+            self.root = Node(val)
+        else:
+            self.insert_rec(self.root, val)
+
+    def insert_rec(self, curr, val):
+        if val < curr.val:
+            if curr.left is None:
+                curr.left = Node(val)
+            else:
+                self.insert_rec(curr.left, val)
+        else:
+            if curr.right is None:
+                curr.right = Node(val)
+            else:
+                self.insert_rec(curr.right, val)
+
+    def search(self, val):
+        return self.search_rec(self.root, val)
+
+    def search_rec(self, curr, val):
+        if curr is None or curr.val == val:
+            return curr
+        if val < curr.val:
+            return self.search_rec(curr.left, val)
+        else:
+            return self.search_rec(curr.right, val)
+
+class Solution:
+    def test(self):
+        # example
+        bst = BinarySearchTree()
+        bst.insert(5)
+        bst.insert(2)
+        print(bst.root.val)
+        bst.search(2)
+```            
 
 ### graph
 - use dict to act as an adjacency list
@@ -458,6 +511,13 @@ zip([1,2,3],[4,5,6],[7,8,9]) # [(1,4,7),(2,5,8),(3,6,9)]
   - n = 30
   - a = 20
   - d = 5
+
+### Combinations
+- n choose k
+```
+import math
+math.comb(n, k)
+```
 
 # TODO
 - bitoperations
