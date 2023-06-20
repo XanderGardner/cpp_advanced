@@ -106,6 +106,10 @@ s_new = s.replace(" ", "")
 
 # split based on character
 s_new = s.split(",")
+
+# check if is digit
+"3".isdigit() # True
+"453".isdigit() # True
 ```
 
 ### dict
