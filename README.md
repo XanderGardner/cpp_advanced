@@ -96,7 +96,16 @@ a = frozenset([1,2,3])
 a = "hel'
 a[2]
 a += "lo"
-print("o" in a)
+print("o" in a) # True
+
+# remove all whitespace
+s_new = "".join(s.split())
+
+# replace characters
+s_new = s.replace(" ", "")
+
+# split based on character
+s_new = s.split(",")
 ```
 
 ### dict
