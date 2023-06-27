@@ -5,6 +5,10 @@
 - [Web Dev](webdev.md)
 - [Conda](conda.md)
 
+[Basic Data Types](#basic-data-types)
+1. [int](#int)
+1. [char](#char)
+
 [Data Structures Built-in](#data-structures-built-in)
 1. [list](#list)
 1. [tuple](#tuple)
@@ -48,7 +52,35 @@
 1. [Sum Sequence](#sum-sequence)
 1. [Combination](#combinations)
 
+[Other Guides](#other-guides)
+1. [Time Complexity](#time-complexity)
+
 [TODO](#todo)
+
+# Basic Data Types
+
+### int
+- integer
+```python
+# max integer and min integer
+import sys
+maxint = sys.maxint
+minint = -sys.maxint-1
+```
+
+### char
+- character
+```python
+# get ascii code of character
+code = ord('A') 
+
+# check if uppercase
+'A'.isupper()
+
+# convert to lower or uppercase
+'A'.lower()
+'a'.upper()
+```
 
 # Data Structures Built-in
 
@@ -532,6 +564,19 @@ import math
 math.comb(n, k)
 ```
 
-# TODO
-- bitoperations
-- https://www.geeksforgeeks.org/number-subarrays-sum-exactly-equal-k/
+# Other Guides
+
+### Time Complexity
+| n | Possible complexities |
+|----|----|
+| n $\leq$ 10 | $n!$, $n^7$, $n^6$|
+| n $\leq$ 20 | $2^n*n$, $n^5$|
+| n $\leq$ 80 | $n^4$|
+| n $\leq$ 400 | $n^3$|
+| n $\leq$ 7500 | $n^2$|
+| n $\leq 7*10^{4}$ | $n\sqrt{n}$|
+| n $\leq 5*10^{5}$ | $n\log{n}$|
+| n $\leq 5*10^{6}$ | $n$|
+| n $\leq 10^{18}$ | $\log^2{n}$, $\log{n}$, $1$|
+
+
