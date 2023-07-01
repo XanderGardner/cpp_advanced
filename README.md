@@ -64,8 +64,8 @@
 ```python
 # max integer and min integer
 import sys
-maxint = sys.maxint
-minint = -sys.maxint-1
+maxint = sys.maxsize # sys.maxint for versions before python3
+minint = -sys.maxsize-1
 ```
 
 ### char
