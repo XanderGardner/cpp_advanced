@@ -1,6 +1,6 @@
 # Language Basics
 - [C++](cpp_basics.md)
-= [scala](scala_basics.md)
+- [scala](scala_basics.md)
 
 # Languages for Competitive Programming
 - [python](python_cp.md)
