@@ -4,26 +4,30 @@
 Basic Data Types
 - [int](#int)
 - [char](#char)
+- [str](#str)
 
-Data Structures Built-in
+Collections
 - [list](#list)
 - [tuple](#tuple)
-- [set](#set)
-- [frozenset](#frozenset)
-- [str](#str)
-- [dict](#dict)
 - [bytearray](#bytearray)
-
-Data Structures to Import
+- [stack](#stack)
 - [queue](#queue)
 - [deque](#deque)
-- [heapq](#heapq)
+
+Ordered Collection
+- [heapq (priority queue)](#heapq)
 - [SortedList](#sortedlist)
+
+Set
+- [set](#set)
+- [frozenset](#frozenset)
+
+Maps
+- [dict](#dict)
 - [defaultdict](#defaultdict)
 - [Counter](#counter)
 
-Data Structures to Implement
-- [stack](#stack)
+Node Based
 - [linkedlist](#linkedlist)
 - [tree](#tree)
   - [binary search tree](#binary-search-tree)
@@ -32,7 +36,12 @@ Data Structures to Implement
 - [graph](#graph)
   - [DFS](#graph-dfs)
   - [BFS](#graph-bfs)
+
+Range Queries
 - [segment tree](#segment-tree)
+
+Grouping
+- [union-find](#union-find)
 
 Algorithms
 - [Searching](#searching)
@@ -40,7 +49,7 @@ Algorithms
 - [Dynamic Programming](#dynamic-programming)
   - [bitmasking](#bitmasking)
 
-Techniques
+Python Techniques
 - [Nested Functions](#nested-functions)
 - [Enumerate](#enumerate)
 - [Comparing Objects](#comparing-objects)
@@ -80,43 +89,6 @@ code = ord('A')
 'a'.upper()
 ```
 
-# list
-- indexed collection of data
-- inset/deleting at front requires shifting
-- can use as a stack
-``` python
-a = [1,2]
-a = [[0] for _ in range(5)] # list of lists without self-referencing
-a += [3]
-a.index(2) # returns index of first instance of the value 2
-a.remove(2) # removes first instance of the value 2
-a.pop(1) # removes index (or last if not specified)
-a.count(2) # counts number of 2s in the list
-```
-# tuple
-- immutable list
-``` python
-a = (1,3,2)
-b = (1,)
-c = tuple(list1)
-a[1]
-```
-
-# set
-- uses hash table w/ linked list
-``` python
-a = set([2,1,3])
-print(1 in set)
-a.add(4)
-a.remove(4)
-```
-
-# frozenset
-- immutable set
-``` python
-a = frozenset([1,2,3])
-```
-
 # str
 - immutable array of bytes (modifying creates a new string)
 - represents unicode characters
@@ -140,19 +112,26 @@ s_new = s.split(",")
 "453".isdigit() # True
 ```
 
-# dict
-- collection of key-value pairs
-- advanced version of hash table
+# list
+- indexed collection of data
+- inset/deleting at front requires shifting
+- can use as a stack
 ``` python
-a = {"a":2, "h":5}
-a["b"] = 3
-print("a" in a)
-a["a"]
-del a["a"] # or a.pop("a") which also gets item
-
-a.keys() # returns iterable
-a.values() # returns iterable
-for key, value in a.items():
+a = [1,2]
+a = [[0] for _ in range(5)] # list of lists without self-referencing
+a += [3]
+a.index(2) # returns index of first instance of the value 2
+a.remove(2) # removes first instance of the value 2
+a.pop(1) # removes index (or last if not specified)
+a.count(2) # counts number of 2s in the list
+```
+# tuple
+- immutable list
+``` python
+a = (1,3,2)
+b = (1,)
+c = tuple(list1)
+a[1]
 ```
 
 # bytearray
@@ -163,6 +142,14 @@ a = bytearray((23,4,3))
 b = bytearray((3,))
 a[2] # returns integer
 a.append(30)
+```
+
+# stack
+- just use a list
+``` python
+a = []
+a += [1]
+a.pop()
 ```
 
 # queue
@@ -231,6 +218,36 @@ a.count(5)
 a.index(5)
 ```
 
+# set
+- uses hash table w/ linked list
+``` python
+a = set([2,1,3])
+print(1 in set)
+a.add(4)
+a.remove(4)
+```
+
+# frozenset
+- immutable set
+``` python
+a = frozenset([1,2,3])
+```
+
+# dict
+- collection of key-value pairs
+- advanced version of hash table
+``` python
+a = {"a":2, "h":5}
+a["b"] = 3
+print("a" in a)
+a["a"]
+del a["a"] # or a.pop("a") which also gets item
+
+a.keys() # returns iterable
+a.values() # returns iterable
+for key, value in a.items():
+```
+
 # defaultdict
 - dict but accessing unknown key creates the key with a default value instead of erroring
 ```
@@ -251,14 +268,6 @@ a = Counter("hello")
 # useful trick
 a = Counter([1, 3, 4, 1, 2, 1, 1, 3, 4, 3, 5, 1, 2, 5, 3, 4, 5])
 b = counter.most_common(3) # [(1, 5), (3, 4), (4, 3)]
-```
-
-# stack
-- just use a list
-``` python
-a = []
-a += [1]
-a.pop()
 ```
 
 # linkedlist
@@ -451,6 +460,37 @@ def create_st(self, a):
         self.update_st(st, i, a[i])
     return st
 
+```
+
+# union-find
+- logn union and logn find
+``` python
+# create union find
+link = list(range(n))
+size = [1] * n # track size of groups
+
+def find(x):
+  if link[x] != x:
+    link[x] = find(link[x])
+  return link[x]
+
+def union(x, y):
+  root_x = find(x)
+  root_y = find(y)
+
+  if root_x == root_y:
+      return
+
+  if size[root_x] < size[root_y]:
+      link[root_x] = root_y
+      size[root_y] += size[root_x]
+  else:
+      link[root_y] = root_x
+      size[root_x] += size[root_y]
+
+union(0, 1) # union items 0 and 1
+find(1) # find group for 1
+find(1) == find(2) # check if itmes 1 and 2 are in the same group
 ```
 
 # Searching
