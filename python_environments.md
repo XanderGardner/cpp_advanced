@@ -1,7 +1,8 @@
-# Table of Contents
+# Python Environments
 - [Back to Main](README.md)
 
-[conda](#conda)
+- [conda](#conda)
+- [virtualenv](#virtualenv)
 
 # conda
 Create different environments which hold different packages. The "base" environment has everything
@@ -33,4 +34,23 @@ conda list
 - To install package in current environment
 ```
 conda install pandas
+```
+
+# virtualenv
+- running pip installs executables into the virutal environment 
+- install
+```
+pip install virtualenv
+```
+- create virtual environment stored in venv folder for current project
+```
+virtualenv venv
+```
+- activate virtual environment stored in venv folder
+```
+source venv/bin/activate
+```
+- deactivate virtual environment
+```
+deactivate
 ```
