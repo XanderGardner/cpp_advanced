@@ -1,61 +1,63 @@
 # Python for Competitive Programming
 - [Main](README.md)
 
-[Basic Data Types](#basic-data-types)
-1. [int](#int)
-1. [char](#char)
+Basic Data Types
+- [int](#int)
+- [char](#char)
 
-[Data Structures Built-in](#data-structures-built-in)
-1. [list](#list)
-1. [tuple](#tuple)
-1. [set](#set)
-1. [frozenset](#frozenset)
-1. [str](#str)
-1. [dict](#dict)
-1. [bytearray](#bytearray)
+Data Structures Built-in
+- [list](#list)
+- [tuple](#tuple)
+- [set](#set)
+- [frozenset](#frozenset)
+- [str](#str)
+- [dict](#dict)
+- [bytearray](#bytearray)
 
-[Data Structures to Import](#data-structures-to-import)
-1. [queue](#queue)
-1. [deque](#deque)
-1. [heapq](#heapq)
-1. [SortedList](#sortedlist)
-1. [defaultdict](#defaultdict)
-1. [Counter](#counter)
+Data Structures to Import
+- [queue](#queue)
+- [deque](#deque)
+- [heapq](#heapq)
+- [SortedList](#sortedlist)
+- [defaultdict](#defaultdict)
+- [Counter](#counter)
 
-[Data Structures to Implement](#data-structures-to-implement)
-1. [stack](#stack)
-1. [linkedlist](#linkedlist)
-1. [graph](#graph)
-1. [segment tree](#segment-tree)
+Data Structures to Implement
+- [stack](#stack)
+- [linkedlist](#linkedlist)
+- [tree](#tree)
+  - [binary search tree](#binary-search-tree)
+  - [DFS](#tree-dfs)
+  - [BFS](#tree-bfs)
+- [graph](#graph)
+  - [DFS](#graph-dfs)
+  - [BFS](#graph-bfs)
+- [segment tree](#segment-tree)
 
-[Algorithms](#algorithms)
-1. [Bit Operations](#bit-operations)
-1. [DFS](#dfs)
-1. [BFS](#bfs)
-1. [Dynamic Programming](#dynamic-programming)
-1. [Searching](#searching)
-1. [Sorting](#sorting)
+Algorithms
+- [Searching](#searching)
+- [Sorting](#sorting)
+- [Dynamic Programming](#dynamic-programming)
+  - [bitmasking](#bitmasking)
 
-[Techniques](#techniques)
-1. [Nested Functions](#nested-functions)
-1. [Enumerate](#enumerate)
-1. [Comparing Objects](#comparing-objects)
-1. [Map Function](#map-function)
-1. [Filter Function](#filter-function)
-1. [Zip Function](#zip-function)
+Techniques
+- [Nested Functions](#nested-functions)
+- [Enumerate](#enumerate)
+- [Comparing Objects](#comparing-objects)
+- [Map Function](#map-function)
+- [Filter Function](#filter-function)
+- [Zip Function](#zip-function)
 
-[Math](#math)
-1. [Sum Sequence](#sum-sequence)
-1. [Combination](#combinations)
+Math
+- [Sum Sequence](#sum-sequence)
+- [Combination](#combinations)
 
-[Other Guides](#other-guides)
-1. [Time Complexity](#time-complexity)
+Other Guides
+- [Time Complexity](#time-complexity)
 
-[TODO](#todo)
+------
 
-# Basic Data Types
-
-### int
+# int
 - integer
 ```python
 # max integer and min integer
@@ -64,7 +66,7 @@ maxint = sys.maxsize # sys.maxint for versions before python3
 minint = -sys.maxsize-1
 ```
 
-### char
+# char
 - character
 ```python
 # get ascii code of character
@@ -78,9 +80,7 @@ code = ord('A')
 'a'.upper()
 ```
 
-# Data Structures Built-in
-
-### list
+# list
 - indexed collection of data
 - inset/deleting at front requires shifting
 - can use as a stack
@@ -93,7 +93,7 @@ a.remove(2) # removes first instance of the value 2
 a.pop(1) # removes index (or last if not specified)
 a.count(2) # counts number of 2s in the list
 ```
-### tuple
+# tuple
 - immutable list
 ``` python
 a = (1,3,2)
@@ -102,7 +102,7 @@ c = tuple(list1)
 a[1]
 ```
 
-### set
+# set
 - uses hash table w/ linked list
 ``` python
 a = set([2,1,3])
@@ -111,13 +111,13 @@ a.add(4)
 a.remove(4)
 ```
 
-### frozenset
+# frozenset
 - immutable set
 ``` python
 a = frozenset([1,2,3])
 ```
 
-### str
+# str
 - immutable array of bytes (modifying creates a new string)
 - represents unicode characters
 ``` python
@@ -140,7 +140,7 @@ s_new = s.split(",")
 "453".isdigit() # True
 ```
 
-### dict
+# dict
 - collection of key-value pairs
 - advanced version of hash table
 ``` python
@@ -155,7 +155,7 @@ a.values() # returns iterable
 for key, value in a.items():
 ```
 
-### bytearray
+# bytearray
 - sequence of integers
 - integers are byte size: 0 <= x <= 255
 ``` python
@@ -165,9 +165,7 @@ a[2] # returns integer
 a.append(30)
 ```
 
-# Data Structures to Import
-
-### queue
+# queue
 - FIFO (oldest out)
 ``` python
 from queue import Queue
@@ -176,7 +174,7 @@ a.put(1)
 a.get()
 ```
 
-### deque
+# deque
 - remove either end in O(1)
 ``` python
 from collections import deque
@@ -186,40 +184,54 @@ a.popleft()
 a.pop() # pops right
 ```
 
-### heapq
+# heapq
 - algorithm when used with list to make a priority queue
 - this is a min-heap. to use a max-heap easily, make vals negative
 ``` python
 import heapq
+
+# create
 a = [1,3,4,5]
 heapq.heapify(a)
+
+# push
 heapq.heappush(a, 6)
+
+# pop
 heapq.heappop(a)
 ```
+
 - use tuples to sort based on index 0
 ``` python
 a = [(1, "a"), (5, "d")]
 heapq.heapify(a)
 ```
 
-### SortedList
+# SortedList
 - maintains a sorted list
 - nlogn creation
 - logn adding and removing
 ``` python
 from sortedcontainers import SortedList
-a = SortedList([1, 5, 4])
-a.add(2)
-a.remove(5) # a.discard(5) for not throwing error if not present
-a.pop(2) # default will pop -1 (last element)
 
+# create
+a = SortedList([1, 5, 4])
+
+# add
+a.add(2)
+
+# remove
+a.remove(5)
+a.discard(5) # will not throw error if not present
+a.pop(2) # default will pop -1 (last element is largest)
+
+# get index
 a.bisect_left(5) # gets index of where you would insert 5
-# [1,3,5,5,6] bisect_left is 2, bisect_right is 4 based on same elements present
 a.count(5)
 a.index(5)
 ```
 
-### defaultdict
+# defaultdict
 - dict but accessing unknown key creates the key with a default value instead of erroring
 ```
 from collections import defaultdict
@@ -228,7 +240,7 @@ a = defaultdict(lambda: 1)
 a["d"] += 1 # a["d"] is now 2
 ```
 
-### Counter
+# Counter
 - dict where values are the counted number of times the key appears
 ```
 from collections import Counter
@@ -241,17 +253,15 @@ a = Counter([1, 3, 4, 1, 2, 1, 1, 3, 4, 3, 5, 1, 2, 5, 3, 4, 5])
 b = counter.most_common(3) # [(1, 5), (3, 4), (4, 3)]
 ```
 
-
-# Data Structures to Implement
-
-### stack
+# stack
 - just use a list
 ``` python
 a = []
 a += [1]
 a.pop()
 ```
-### linkedlist
+
+# linkedlist
 - make a simple Node class
 ``` python
 class Node:
@@ -263,59 +273,100 @@ class Node:
 root = Node(2)
 ```
 
+# tree
+``` python
+class Node:
+  def __init__(self, val):
+    self.val = val
+    self.left = None
+    self.right = None
+
+  def solution(self):
+    a = Node(5)
+```
+
 ### binary search tree
 
 ``` python
 class Node:
-    def __init__(self, val):
-        self.val = val
-        self.left = None
-        self.right = None
+  def __init__(self, val):
+    self.val = val
+    self.left = None
+    self.right = None
 
 class BinarySearchTree:
-    def __init__(self):
-        self.root = None
+  def __init__(self):
+      self.root = None
 
-    def insert(self, val):
-        if self.root is None:
-            self.root = Node(val)
-        else:
-            self.insert_rec(self.root, val)
+  def insert(self, val):
+    if self.root is None:
+      self.root = Node(val)
+    else:
+      self.insert_rec(self.root, val)
 
-    def insert_rec(self, curr, val):
-        if val < curr.val:
-            if curr.left is None:
-                curr.left = Node(val)
-            else:
-                self.insert_rec(curr.left, val)
-        else:
-            if curr.right is None:
-                curr.right = Node(val)
-            else:
-                self.insert_rec(curr.right, val)
+  def insert_rec(self, curr, val):
+    if val < curr.val:
+      if curr.left is None:
+        curr.left = Node(val)
+      else:
+        self.insert_rec(curr.left, val)
+    else:
+      if curr.right is None:
+        curr.right = Node(val)
+      else:
+        self.insert_rec(curr.right, val)
 
-    def search(self, val):
-        return self.search_rec(self.root, val)
+  def search(self, val):
+    return self.search_rec(self.root, val)
 
-    def search_rec(self, curr, val):
-        if curr is None or curr.val == val:
-            return curr
-        if val < curr.val:
-            return self.search_rec(curr.left, val)
-        else:
-            return self.search_rec(curr.right, val)
+  def search_rec(self, curr, val):
+    if curr is None or curr.val == val:
+      return curr
+    if val < curr.val:
+      return self.search_rec(curr.left, val)
+    else:
+      return self.search_rec(curr.right, val)
 
 class Solution:
-    def test(self):
-        # example
-        bst = BinarySearchTree()
-        bst.insert(5)
-        bst.insert(2)
-        print(bst.root.val)
-        bst.search(2)
-```            
+  def test(self):
+    # example
+    bst = BinarySearchTree()
+    bst.insert(5)
+    bst.insert(2)
+    print(bst.root.val)
+    bst.search(2)
+```   
 
-### graph
+### tree DFS
+``` python
+def preorder(root):
+  return [root.val] + preorder(root.left) + preorder(root.right) if root else []
+def inorder(root):
+  return  inorder(root.left) + [root.val] + inorder(root.right) if root else []
+def postorder(root):
+  return  postorder(root.left) + postorder(root.right) + [root.val] if root else []
+```
+
+### tree BFS
+- gets level order traversal
+``` python
+curr_row = [root]
+
+while len(curr_row) > 0:
+  next_row = []
+
+  for node in curr_row:
+    print(node.val) # process
+
+    if node.left:
+      next_row += [node.left]
+    if node.right:
+      next_row += [node.right]
+
+  curr_row = next_row
+```
+
+# graph
 - use dict to act as an adjacency list
 ``` python
 a = {
@@ -328,7 +379,43 @@ a = {
 }
 ```
 
-### segment tree
+### graph DFS
+- for graphs, must track visited bc of cycles (recursive)
+``` python
+def dfs(graph, visited, node):
+  if node not in visited:
+    print(node)
+    visited.add(node)
+    for neighbour in graph[node]:
+      dfs(visited, graph, neighbour)
+
+visited = set() 
+dfs(graph, visited, '5')
+```
+
+### graph BFS
+- for graphs, must track visited bc of cycles (uses queue)
+``` python
+def BFS(s):
+  visited = set()
+  queue = []
+
+  # start at source
+  queue.append(s)
+  visited.add(s)
+
+  while queue:
+    s = queue.pop(0)
+    print(s) # process
+
+    # go through neighbors
+    for i in self.graph[s]:
+      if i not in visited:
+        queue.append(i)
+        visited.add(i)
+```
+
+# segment tree
 - usable update and query on ranges (can include max, min, sum, and more)
 ``` python
 def update_st(self, st, i, new_val):
@@ -366,88 +453,20 @@ def create_st(self, a):
 
 ```
 
-# Algorithms
-
-### Bit Operations
-- TODO
-
-### DFS
-- for trees (recursive)
-``` python
-def preorder(root):
-  return [root.val] + preorder(root.left) + preorder(root.right) if root else []
-def inorder(root):
-  return  inorder(root.left) + [root.val] + inorder(root.right) if root else []
-def postorder(root):
-  return  postorder(root.left) + postorder(root.right) + [root.val] if root else []
-```
-- for graphs, must track visited bc of cycles (recursive)
-``` python
-def dfs(graph, visited, node):  #function for dfs 
-    if node not in visited:
-        print(node)
-        visited.add(node)
-        for neighbour in graph[node]:
-            dfs(visited, graph, neighbour)
-```
-``` python
-graph = {
-  '5' : ['3','7'],
-  '3' : ['2', '4'],
-  '7' : ['8'],
-  '2' : [],
-  '4' : ['8'],
-  '8' : []
-}
-visited = set() # Set to keep track of visited nodes of graph (bc of graph cycles)
-dfs(graph, visited, '5')
-```
-
-### BFS
-- for graphs, must track visited bc of cycles (uses queue)
-- starts from a certain node, s (all nodes labeled 0, 1...)
-``` python
-def BFS(self, s):
-  visited = [False] * (len(self.graph))
-  queue = []
-
-  # start at source
-  queue.append(s)
-  visited[s] = True
-
-  while queue:
-    s = queue.pop(0)
-    print (s, end = " ")
-
-    # go through neighbors
-    for i in self.graph[s]:
-      if visited[i] == False:
-        queue.append(i)
-        visited[i] = True
-```
-
-### Dynamic Programming
-
-- recursion with memoization
-``` python
-memo = {}
-def factorial(n):
-  if n == 1:
-    return 1
-  elif n >= 2:
-    mem[n] = n * factorial(n-1)
-    return memo[n]
-```
-
-### Searching
+# Searching
 - linear search: check left to right
 - binary search: recursive on sorted array
 ``` python
 import bisect
+
+# [1,3,5,5,6] bisect_left is 2, bisect_right is 4 based on same elements present
+
 def search(self, nums, target):
   index = bisect.bisect_left(nums, target)
   return index if index < len(nums) and nums[index] == target else -1
 ```
+
+- implement binary search
 ``` python 
 # returns index of x in arr if present, else -1
 def binary_search(arr, low, high, x):
@@ -463,7 +482,7 @@ def binary_search(arr, low, high, x):
         return binary_search(arr, mid + 1, high, x)
 ```
 
-### Sorting
+# Sorting
 - Selection: repeatedly find smallest w/ linear search
 - Insertion: move next element into left part that is sorted
 - Merge: recursive breakdown and then merge lists back up
@@ -476,23 +495,109 @@ def sortCmp(e):
   
 a = ['ab', 'a', 'df', 'sdf']
 
-# sort mutates (default ascending (False))
+# a.sort()
 a.sort()
 a.sort(reverse=True, key=sortCmp)
 
-# sorted doesn't mutate (default ascending (False))
+# sorted(a) doesn't mutate
 b = sorted(a)
 b = sorted(a, key=sortCmp, reverse=True)
 ```
 
-# Techniques
+# Dynamic Programming
 
-### Nested Functions
+- recursion with memoization
+``` python
+memo = {}
+def factorial(n):
+  if n == 1:
+    return 1
+  elif n >= 2:
+    mem[n] = n * factorial(n-1)
+    return memo[n]
+```
+
+- dp with cache
+- each call has an accossiated state (usually position and other) which is memoized with cache
+- each state has a list of actions you can do
+- return the best result from each action that can be done
+``` python
+@cache
+def dp(i, owned_state):
+  # base case
+  if i == n:
+    return 0
+
+  # recursive case
+  # state: position, if owns stock
+  # action: buy, hold, sell
+  if owned_state:
+    # hold or sell
+    return max(
+      dp(i+1, True),
+      dp(i+1, False)+prices[i]
+    )
+  else:
+    # hold or buy
+    return max(
+      dp(i+1, False),
+      dp(i+1, True)-prices[i]-fee
+    )
+
+return dp(0, False)
+```
+
+### bitmasking
+- 0 is false, numbers are true. Bits can be manipulated to work with subsets
+```python
+# basics
+a & 1   # true if odd
+a << 5  # left shift 5,  (multiply by 2^5)
+a >> 5  # shift right 5, (divide by 2^5 rounded down)
+
+x & (1 << k)  # true if kth bit of x set
+x | (1 << k)  # set kth bit of x to 1
+x & ~(1 << k) # set kth bit of x to 0
+x ^ (1 << k)  # invert kth bit of x
+
+# goes through all subsets of n elements
+for s in range(1<<n):
+  print(s)
+```
+- bitmasking converts permutations (n!) to subsets (n*2^n) in dynamic programming. ex: elevator has max weight x. n people each with different weights travel up on the elevator. find the min # of trips.
+``` cpp
+// best subset has a memoized pair representing: 1. the number of rides to get everyone up, and 2. the size of the last elevator ride
+best = {};
+best[0] = (1,0);
+
+// iterate over subset of people
+for s in range(1<<n):
+  // worst case: n+1 rides are needed
+  best[s] = (n+1,0);
+
+  // for each person in the subset, ...
+  for p in range(n):
+    if s & (1<<p):
+
+      // ... check the memoized subset without them and the cost to add them
+      option = best[s^(1<<p)];
+      if option[1] + weight[p] <= x:
+        option[1] += weight[p]
+      else:
+        option[0] += 1
+        option[1] = weight[p];
+
+      best[s] = min(best[s], option);
+```
+
+# Nested Functions
 - not as readable, but less memory (since not referencing the class)
 ``` python
 class Solution:
   def do(self):
+    globalval = 5
     def helper():
+      nonlocal globalval # sometimes required to access globalval within
       return
     return helper
 
@@ -505,28 +610,28 @@ class Solution:
     return self.helper
 ```
 
-### Enumerate
+# Enumerate
 - simplifies loops needing value and index
 ``` python
 for index, value in enumerate(values):
 ```
 
-### Comparing Objects
+# Comparing Objects
 - just define this function
 ``` python
 def __lt__(self, other):
   return self.intAttribute < other.intAttribute
 ```
 
-### Map Function
+# Map Function
 - given function and iterable, returns iterable (map object) with all items run through the function
-```
+```python
 def squ(n):
   return n ** 2
 map(squ, [1,3,2]) # [1,9,4]
 ```
 
-### Filter Function
+# Filter Function
 - given function (that returns a boolean) and iterable, returns iterable (filter object) with only items that cause the given function to return True
 ```
 def odd(n):
@@ -534,15 +639,13 @@ def odd(n):
 filter(odd, [1,2,3,4]) # [1,3]
 ```
 
-### Zip Function
+# Zip Function
 - given any number of iterables of equal length, returns iterable (zip object) of tuples (grouping items of the same index)
 ```
 zip([1,2,3],[4,5,6],[7,8,9]) # [(1,4,7),(2,5,8),(3,6,9)]
 ```
 
-# Math
-
-### Sum Sequence
+# Sum Sequence
 - n: number of numbers in sequence
 - a: first number in sequence
 - d: difference between numbers
@@ -553,16 +656,14 @@ zip([1,2,3],[4,5,6],[7,8,9]) # [(1,4,7),(2,5,8),(3,6,9)]
   - a = 20
   - d = 5
 
-### Combinations
+# Combinations
 - n choose k
 ```
 import math
 math.comb(n, k)
 ```
 
-# Other Guides
-
-### Time Complexity
+# Time Complexity
 | n | Possible complexities |
 |----|----|
 | n $\leq$ 10 | $n!$, $n^7$, $n^6$|
@@ -574,5 +675,3 @@ math.comb(n, k)
 | n $\leq 5*10^{5}$ | $n\log{n}$|
 | n $\leq 5*10^{6}$ | $n$|
 | n $\leq 10^{18}$ | $\log^2{n}$, $\log{n}$, $1$|
-
-
