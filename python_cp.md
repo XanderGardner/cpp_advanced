@@ -36,12 +36,16 @@ Node Based
 - [graph](#graph)
   - [DFS](#graph-dfs)
   - [BFS](#graph-bfs)
+  - [topological sort](#topological-sort)
 
 Range Queries
 - [segment tree](#segment-tree)
 
 Grouping
 - [union-find](#union-find)
+
+Strings
+- [trie](#trie)
 
 Algorithms
 - [Searching](#searching)
@@ -424,6 +428,39 @@ def BFS(s):
         visited.add(i)
 ```
 
+# topological sort
+- used to order the vertices of a directed graph in such a way that for every directed edge (u, v), vertex u comes before vertex v in the ordering
+- commonly used in tasks that involve dependency resolution, scheduling, and finding a valid sequence of steps or events
+``` python
+def topological_sort(graph):
+  visited = set()
+  stack = []
+  
+  def dfs(vertex):
+    visited.add(vertex)
+    for neighbor in graph[vertex]:
+      if neighbor not in visited:
+        dfs(neighbor)
+    stack.append(vertex)
+  
+  for vertex in graph:
+    if vertex not in visited:
+      dfs(vertex)
+  
+  return stack[::-1]
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+result = topological_sort(graph)
+print(result)  # Output: ['A', 'C', 'F', 'B', 'E', 'D']
+```
+
 # segment tree
 - usable update and query on ranges (can include max, min, sum, and more)
 ``` python
@@ -491,6 +528,48 @@ def union(x, y):
 union(0, 1) # union items 0 and 1
 find(1) # find group for 1
 find(1) == find(2) # check if itmes 1 and 2 are in the same group
+```
+
+# trie
+- insert O(n), search O(n), and has_prefix O(n) for strings with alphabet
+``` python
+class TrieNode:
+  def __init__(self):
+    self.children = {}
+    self.is_end_of_word = False
+
+class Trie:
+  def __init__(self):
+    self.root = TrieNode()
+
+  def insert(self, word):
+    current = self.root
+    for char in word:
+      if char not in current.children:
+        current.children[char] = TrieNode()
+      current = current.children[char]
+    current.is_end_of_word = True
+
+  def search(self, word):
+    current = self.root
+    for char in word:
+      if char not in current.children:
+        return False
+      current = current.children[char]
+    return current.is_end_of_word
+
+  def starts_with(self, prefix):
+    current = self.root
+    for char in prefix:
+      if char not in current.children:
+        return False
+      current = current.children[char]
+    return True
+
+trie = Trie()
+trie.insert("apple")
+trie.search("apple")
+trie.starts_with("app")
 ```
 
 # Searching
