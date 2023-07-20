@@ -17,3 +17,6 @@
 
 # Web Development
 - [react](react)
+
+# Other
+- [om study](om_study.md)
