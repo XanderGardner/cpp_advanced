@@ -12,8 +12,8 @@
 - [Data Science](python_datascience.md)
 
 # Systems
-- [Unix](#unix.md)
+- [Unix](unix.md)
 - [AWS](aws.md)
 
 # Web Development
-- [react](#react)
+- [react](react)
