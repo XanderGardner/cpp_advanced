@@ -1,6 +1,4 @@
 # Python Webscrapping
-- [Back to Main](README.md)
-
 [Webscraping](#webscraping)
 1. [selenium](#selenium)
 1. [threading](#threading)

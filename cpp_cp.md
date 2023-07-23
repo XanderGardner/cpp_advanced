@@ -1,6 +1,4 @@
 # C++ For Competitive Programming
-- [Back to Main](README.md)
-
 STL:
 
 [stl data structures](#stl-data-structures)

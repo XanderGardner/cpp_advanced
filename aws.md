@@ -1,6 +1,4 @@
 # AWS
-- [Back to Main](README.md)
-
 - [the cloud](#the-cloud)
 
 ---

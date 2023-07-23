@@ -1,6 +1,4 @@
 # Scala Basics
-- [Main](README.md)
-
 [Basics](#basics)
 1. [variables](#variables)
 1. [data types](#data-types)

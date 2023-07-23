@@ -1,5 +1,4 @@
 # Python for Competitive Programming
-- [Main](README.md)
 
 Basic Data Types
 - [int](#int)

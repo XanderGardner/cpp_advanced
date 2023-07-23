@@ -1,6 +1,4 @@
 # React
-- [Back to Main](README.md)
-
 [Javascript](#javascript)
 [JSX][#JSX]
 [Importing][#Importing]

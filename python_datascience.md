@@ -1,6 +1,4 @@
 # Data Science with Python
-- [Back to Main](README.md)
-
 [pandas](#pandas)
 1. [create](#create)
 1. [output](#output)

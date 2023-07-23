@@ -18,5 +18,8 @@
 # Web Development
 - [react](react)
 
+# Math
+- [trading math](trading_math.md)
+
 # Other
 - [om study](om_study.md)

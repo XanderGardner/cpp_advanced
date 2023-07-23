@@ -1,6 +1,4 @@
 # Python Environments
-- [Back to Main](README.md)
-
 - [conda](#conda)
 - [virtualenv](#virtualenv)
 

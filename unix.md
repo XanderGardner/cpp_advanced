@@ -1,6 +1,4 @@
 # Unix
-- [Back to Main](README.md)
-
 - [the unix system](#the-unix-system)
 - [command structure](#command-structure)
 - [text editors](#text-editors)

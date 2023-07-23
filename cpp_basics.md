@@ -1,6 +1,4 @@
 # C++ Basics
-- [Back to Main](README.md)
-
 - [Compiling](#compiling)
 - [namespace and libraries](#namespace-and-libraries)
 - [Comments](#comments)
