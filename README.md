@@ -2,7 +2,7 @@
 - [C++](cpp_basics.md)
 - [scala](scala_basics.md)
 
-# Languages for Competitive Programming
+# Languages for CP
 - [python](python_cp.md)
 - [C++](cpp_cp.md)
 
