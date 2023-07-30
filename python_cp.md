@@ -24,6 +24,7 @@ Set
 Maps
 - [dict](#dict)
 - [defaultdict](#defaultdict)
+- [OrderedDict](#ordereddict)
 - [Counter](#counter)
 
 Node Based
@@ -268,9 +269,22 @@ a = defaultdict(lambda: 1)
 a["d"] += 1 # a["d"] is now 2
 ```
 
+# OrderedDict
+- keys ordered by when they were made
+- if the value of a certain key is changed, the position of the key remains unchanged in OrderedDict
+```python
+from collections import OrderedDict
+
+a = OrderedDict()
+a[3] = "j" 
+
+a.popitem() # pop the most recently addded item
+a.popitem(last=False) # pop the oldest added item
+```
+
 # Counter
 - dict where values are the counted number of times the key appears
-```
+```python
 from collections import Counter
 a = Counter("hello") # {"h":1, "e":1, "l":2, "o":1"}
 
