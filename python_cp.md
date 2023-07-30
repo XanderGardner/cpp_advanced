@@ -167,12 +167,18 @@ a.get()
 
 # deque
 - remove either end in O(1)
+- can be used as a linkedlist, stack, or queue
 ``` python
 from collections import deque
 a = deque()
-a.append(1) # appends right
+
+# right end
+a.append(1)
+a.pop()
+
+# left end
+a.appendleft(1)
 a.popleft()
-a.pop() # pops right
 ```
 
 # heapq
