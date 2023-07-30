@@ -201,6 +201,7 @@ heapq.heapify(a)
 - maintains a sorted list
 - nlogn creation
 - logn adding and removing
+- can usually use heapq array instead
 ``` python
 from sortedcontainers import SortedList
 
@@ -264,13 +265,9 @@ a["d"] += 1 # a["d"] is now 2
 - dict where values are the counted number of times the key appears
 ```
 from collections import Counter
-a = Counter("hello")
-# {"h":1, "e":1, "l":2, "o":1"}
-```
-```
-# useful trick
-a = Counter([1, 3, 4, 1, 2, 1, 1, 3, 4, 3, 5, 1, 2, 5, 3, 4, 5])
-b = counter.most_common(3) # [(1, 5), (3, 4), (4, 3)]
+a = Counter("hello") # {"h":1, "e":1, "l":2, "o":1"}
+
+a.most_common(2) # get top 2 most common [('l', 2), ('h', 1)]
 ```
 
 # linkedlist
@@ -678,26 +675,29 @@ x | (1 << k)  # set kth bit of x to 1
 x & ~(1 << k) # set kth bit of x to 0
 x ^ (1 << k)  # invert kth bit of x
 
+a = str(bin(x)) # get binary string "0b101101" ("0b" prefix always attached)
+str(bin(x))[2:].count("1") # number of set bits
+
 # goes through all subsets of n elements
 for s in range(1<<n):
   print(s)
 ```
 - bitmasking converts permutations (n!) to subsets (n*2^n) in dynamic programming. ex: elevator has max weight x. n people each with different weights travel up on the elevator. find the min # of trips.
 ``` cpp
-// best subset has a memoized pair representing: 1. the number of rides to get everyone up, and 2. the size of the last elevator ride
+# best subset has a memoized pair representing: 1. the number of rides to get everyone up, and 2. the size of the last elevator ride
 best = {};
 best[0] = (1,0);
 
-// iterate over subset of people
+# iterate over subset of people
 for s in range(1<<n):
-  // worst case: n+1 rides are needed
+  # worst case: n+1 rides are needed
   best[s] = (n+1,0);
 
-  // for each person in the subset, ...
+  # for each person in the subset, ...
   for p in range(n):
     if s & (1<<p):
 
-      // ... check the memoized subset without them and the cost to add them
+      # ... check the memoized subset without them and the cost to add them
       option = best[s^(1<<p)];
       if option[1] + weight[p] <= x:
         option[1] += weight[p]
