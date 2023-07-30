@@ -45,6 +45,7 @@ Grouping
 
 Strings
 - [trie](#trie)
+- [z-array](#z-array)
 
 Algorithms
 - [Searching](#searching)
@@ -566,6 +567,26 @@ trie = Trie()
 trie.insert("apple")
 trie.search("apple")
 trie.starts_with("app")
+```
+
+# z-array
+- In O(n) computes for each index, the length of the longest substring of s that begins at position k and is a prefix of s.
+- [A,C,B,A,C] -> [-,0,0,2,0]
+- Find where string a occurs in string b by making new string s=a#b where # is a character never found in either string. Find z-array of s and count numbers with length of a.
+
+```python
+def get_z(s):
+  n = len(s)
+  z = [0] * n
+  x, y = 0, 0
+
+  for i in range(1, n):
+    z[i] = max(0, min(z[i - x], y - i + 1))
+    while i + z[i] < n and s[z[i]] == s[i + z[i]]:
+      x = i
+      y = i + z[i]
+      z[i] += 1
+  return z
 ```
 
 # Searching
