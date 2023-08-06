@@ -1,5 +1,8 @@
 # Python for Competitive Programming
 
+Basics
+- [read input](#read-input)
+
 Basic Data Types
 - [int](#int)
 - [char](#char)
@@ -70,6 +73,21 @@ Other Guides
 - [Time Complexity](#time-complexity)
 
 ------
+
+# read input
+- read from stdin
+```python
+import sys
+
+def main():
+  words = []
+  for line in sys.stdin:
+    words += line.strip().split(" ")
+  print(words)
+
+if __name__ == "__main__":
+  main()
+```
 
 # int
 - integer
