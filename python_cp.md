@@ -2,6 +2,7 @@
 
 Basics
 - [read input](#read-input)
+- [throw errors](#throw-errors)
 
 Basic Data Types
 - [int](#int)
@@ -87,6 +88,26 @@ def main():
 
 if __name__ == "__main__":
   main()
+```
+
+# throw errors
+- assert
+```python
+assert(5==5)
+```
+- raise error
+```python
+raise ValueError("message") # for argument checking
+raise RuntimeError("message")
+```
+- try catch
+```python
+try:
+  result = a / b
+  return result
+except Exception as e:
+  print("An error occurred:", e)
+  return None
 ```
 
 # int
