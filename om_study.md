@@ -7,6 +7,43 @@
 
 # Implementations
 
+Hash table
+- a good hash function distributes hash values uniformly and reduces collisions
+- prime numbers used to reduce collisions
+``` python3
+class HashTable:
+  def __init__(self, size=100):
+    self.size = size
+    self.table = [[] for _ in range(size)]
+
+  def _hash_function(self, key):
+    # Simple hash function using the built-in hash() function
+    return hash(key) % self.size
+
+  def put(self, key, value):
+    index = self._hash_function(key)
+    for kvp in self.table[index]:
+      if kvp[0] == key:
+        kvp[1] = value  # Update value if key already exists
+        return
+    self.table[index].append([key, value])
+
+  def get(self, key):
+    index = self._hash_function(key)
+    for kvp in self.table[index]:
+      if kvp[0] == key:
+        return kvp[1]
+    raise KeyError("Key not found in the hashtable")
+
+  def remove(self, key):
+    index = self._hash_function(key)
+    for i, kvp in enumerate(self.table[index]):
+      if kvp[0] == key:
+        self.table[index].pop(i)
+        return
+    raise KeyError("Key not found in the hashtable")
+```
+
 Heap class with ability to push/pop
 
 Matching engine
