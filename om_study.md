@@ -7,6 +7,62 @@
 
 # Implementations
 
+
+Heap
+- add by adding to end and floating up to meet invariant
+- pop by removing top, moving bottom to top, and sinking down to meet invariant
+```python3
+class MinHeap:
+  def __init__(self):
+    self.heap = [0]
+
+  def push(self, val):
+    i = len(self.heap)
+    self.heap.append(val)
+
+    # float up until parent is smaller
+    while i != 1 and self.heap[i//2] > self.heap[i]:
+      self.heap[i//2], self.heap[i] = self.heap[i], self.heap[i//2]
+      i = i//2
+    
+  def pop(self):
+    n = len(self.heap)
+    if n <= 1:
+      raise RuntimeError("cannot pop empty heap")
+    
+    smallest = self.heap[1]
+    
+    # take end and sink from top
+    self.heap[1] = self.heap.pop()
+    n -= 1
+    i = 1
+    
+    while i*2 < n:
+      if i*2+1 < n:
+        # possibly switch with left or right
+        if self.heap[i] > self.heap[i*2] and self.heap[i*2] >= self.heap[i*2+1]:
+          # switch with right
+          self.heap[i], self.heap[i*2+1] = self.heap[i*2+1], self.heap[i]
+          i = i*2+1
+        elif self.heap[i] > self.heap[i*2+1] and self.heap[i*2+1] >= self.heap[i]:
+          # switch with left
+          self.heap[i], self.heap[i*2] = self.heap[i*2], self.heap[i]
+          i = i*2
+        else:
+          # already satifies invariant
+          break
+      else:
+        if self.heap[i] > self.heap[i*2]:
+          # switch with left
+          self.heap[i], self.heap[i*2] = self.heap[i*2], self.heap[i]
+          i = i*2
+        else:
+          # already satifies invariant
+          break
+
+    return smallest
+```
+
 Hash table
 - a good hash function distributes hash values uniformly and reduces collisions
 - prime numbers used to reduce collisions
