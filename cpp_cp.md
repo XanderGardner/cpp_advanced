@@ -161,7 +161,6 @@ a.empty()
 a[2];
 a[1] = 2;
 a.push_back(1);
-a.emplace_back((2,3)); // push back for sinlge elements, emplace_back for tuples
 a.pop_back();
 
 // insert (emplace is inplace efficient inserting)
