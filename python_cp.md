@@ -203,6 +203,7 @@ from queue import Queue
 a = Queue()
 a.put(1)
 a.get()
+a.qsize()
 ```
 
 # deque
