@@ -1,6 +1,7 @@
 # Language Basics
 - [C++](cpp_basics.md)
 - [scala](scala_basics.md)
+- [go](go.md)
 
 # Languages for CP
 - [python](python_cp.md)
