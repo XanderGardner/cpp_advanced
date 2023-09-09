@@ -118,6 +118,7 @@ import random
 
 x = random.randint(a, b) # random int between [a,b]
 y = random.random() # random float between (0,1)
+z = random.choice([1,3,4]) # random element from list
 ```
 
 # int
