@@ -3,6 +3,7 @@
 Basics
 - [read input](#read-input)
 - [throw errors](#throw-errors)
+- [random](#random)
 
 Basic Data Types
 - [int](#int)
@@ -108,6 +109,15 @@ try:
 except Exception as e:
   print("An error occurred:", e)
   return None
+```
+
+# random
+- generate random numbers
+```python
+import random
+
+x = random.randint(a, b) # random int between [a,b]
+y = random.random() # random float between (0,1)
 ```
 
 # int
