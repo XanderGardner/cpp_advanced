@@ -42,6 +42,7 @@ Node Based
   - [DFS](#graph-dfs)
   - [BFS](#graph-bfs)
   - [topological sort](#topological-sort)
+  - [minimum spanning tree](#minimum-spanning-tree)
 
 Range Queries
 - [segment tree](#segment-tree)
@@ -528,6 +529,12 @@ graph = {
 result = topological_sort(graph)
 print(result)  # Output: ['A', 'C', 'F', 'B', 'E', 'D']
 ```
+
+# minimum spanning tree
+- prim's algorithm:
+- Initialize a tree with a single vertex, chosen arbitrarily from the graph.
+- Grow the tree by one edge: Of the edges that connect the tree to vertices not yet in the tree, find the minimum-weight edge, and transfer it to the tree.
+- Repeat step 2 (until n vertices are in the tree).
 
 # segment tree
 - usable update and query on ranges (can include max, min, sum, and more)
