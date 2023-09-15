@@ -84,6 +84,8 @@ import sys
 
 def main():
   words = []
+
+  # stdin.readline().strip().split("")
   for line in sys.stdin:
     words += line.strip().split(" ")
   print(words)
