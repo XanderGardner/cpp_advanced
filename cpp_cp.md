@@ -450,6 +450,10 @@ a.insert(v.begin(), v.end())
 // read
 a.count(5);
 
+// read order
+int max_element = *prev(a.end());
+int min_element = *a.begin();
+
 // remove
 a.erase(10); //removes all instances
 a.erase(a.find(1)); //removes one instance
