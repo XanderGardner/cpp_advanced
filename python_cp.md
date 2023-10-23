@@ -69,6 +69,7 @@ Python Techniques
 - [Zip Function](#zip-function)
 
 Math
+- [Operations](#operations)
 - [Sum Sequence](#sum-sequence)
 - [Combination](#combinations)
 
@@ -874,6 +875,12 @@ zip([1,2,3],[4,5,6],[7,8,9]) # [(1,4,7),(2,5,8),(3,6,9)]
   - n = 30
   - a = 20
   - d = 5
+
+# Operations
+- log
+```python
+math.log(50,3) # base 3
+```
 
 # Combinations
 - n choose k
