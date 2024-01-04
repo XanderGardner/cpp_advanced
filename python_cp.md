@@ -143,6 +143,9 @@ code = ord('A')
 # check if uppercase
 'A'.isupper()
 
+# check alpha numerical
+'y'.isalnum()
+
 # convert to lower or uppercase
 'A'.lower()
 'a'.upper()
@@ -234,6 +237,11 @@ a.pop()
 
 # left end
 a.appendleft(1)
+a.popleft()
+
+# as a queue
+a = deque()
+a.append(3)
 a.popleft()
 ```
 
