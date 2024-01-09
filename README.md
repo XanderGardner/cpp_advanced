@@ -2,6 +2,7 @@
 - [C++](cpp_basics.md)
 - [scala](scala_basics.md)
 - [go](go.md)
+- [javascript](javascript_basics.md)
 
 # Languages for CP
 - [python](python_cp.md)
@@ -17,7 +18,8 @@
 - [AWS](aws.md)
 
 # Web Development
-- [react](react)
+- [npm](npm.md)
+- [react](react.md)
 
 # Math
 - [trading math](trading_math.md)
