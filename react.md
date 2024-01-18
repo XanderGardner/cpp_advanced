@@ -1,459 +1,174 @@
-# React
-[Javascript](#javascript)
-[JSX][#JSX]
-[Importing][#Importing]
-[Components][#Components]
-[Props][#Props]
-[States][#States]
-[Package Management][#Package-Management]
-- [nvm][#nvm]
-- [npm][#npm]
-- [next.js file system][#next.js-file-system]
-[link][#link]
-[head][#head]
-[script][#script]
-[css modules][#css-modules]
-[app.js][#app.js]
-[sass][#sass]
-[rendering][#rendering]
 
-# Javascript
-```javascript
-//////////// VARIABLES ////////////
-
-let x = 5; // variable will change -> let
-const a = 17; // variable will not change -> const
-
-// deconstruction
-let a, b, rest;
-[a, b] = [10, 20];
-[a, b, ...rest] = [10, 20, 30, 40, 50]; // rest is array
-
-// template literals
-// use backtick `
-let a = `he is ${5+1} years old`
+[setup](#setup)
+[component](#component)
+[clicks](#clicks)
+[state](#state)
+[parent child states](#parent-child-states)
 
 
-//////////// OPERATORS ////////////
-let a = isMember ? 10 : 15
+# setup
 
-
-//////////// CONTROL ////////////
-
-// for loop
-for (let i = 0; i < arr.length; i++) { }
-
-
-//////////// FUNCTIONS ////////////
-
-// normal basic function
-function square(number) {
-  return number * number;
-}
-
-// anonymous function
-const square = function (number) {
-  return number * number;
-};
-const x = square(4); // x gets the value 16
-
-// arrow anonymous function with block body
-const func2 = (x, y) => {
-  return x + y;
-};
-
-// arrow anonymous function in use
-const a3 = a.map((s) => s.length); // ["hi", "b"] -> [2,1]
-
-
-//////////// DATA STRUCTURES ////////////
-
-// object
-let person1 = {
-  name: "john",
-  age: 2,
-}
-
-// array
-const a = [1,"hi"];
-a.push(2.34);
-a.length
-
-
-//////////// IMPORTING/EXPORTING ////////////
-
-// exporting/importing library/multiple
-// exporting in say.js
-function sayHi(user) {
-  alert(`Hello, ${user}!`);
-}
-let months = ['Jan', 'Feb', 'Mar']
-export {sayHi, months}; // a list of exported variables
-
-// importing in main.js
-import {sayHi, months} from './say.js';
-import * as say from './say.js';
-say.sayHi('john');
-
-// exporting one class
-// exporting in user.js
-export default class User { // just add "default"
-  constructor(name) {
-    this.name = name;
+a basic set has the following:
+```
+example/
+├── public/
+│   └── index.html
+├── src/
+│   ├── index.js
+│   ├── styles.css
+│   └── App.js
+└── package.json
+```
+package.json:
+```json
+{
+  "name": "react.dev",
+  "version": "0.0.0",
+  "main": "/src/index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-scripts": "^5.0.0"
+  },
+  "devDependencies": {},
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
-
-// importing in main.js
-import User from './user.js'; // not {User}, just User
-new User('John');
-
 ```
-
-# JSX
-- lets you write HTML like code in javascript
-- you can convert HTML to jsx using a [converter tool like this](https://transform.tools/html-to-jsx)
-- 3 Rules:
-  1. Multiple elements together must be in one tag
-``` jsx
-<>
-  <h1>Hedy</h1>
-  <h2>hi<\h2>
-</>
-```
-  2. All tags need to be closed, even single ones
-``` jsx
-<img 
-  src="https://i.imgur.com/yXOvdOSs.jpg"
-/>
-```
-  3. CamelCase most things
-``` jsx
-<img 
-  src="https://i.imgur.com/yXOvdOSs.jpg"
-  className="photo" // originally class-name
-/>
-```
-
-# Importing
-- Import React (core library) and ReactDOM (to interact with DOM) and babel (javascript compiler to convert jsx to javascript)
-``` HTML
-<!-- index.html -->
-<html>
-  <body>
-    <div id="app"></div>
-
-    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <script type="text/jsx">
-      const app = document.getElementById('app');
-      ReactDOM.render(<h1>Develop. Preview. Ship. 🚀</h1>, app);
-    </script>
-
-  </body>
+index.html:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root"></div>
+</body>
 </html>
 ```
+index.js:
+```js
+import React, { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./styles.css";
 
-# Components
-- functions that group html into a component
-- must be capitalized and calced as an html tag
-``` jsx
-function Header() {
-  return <h1>hello there</h1>;
-}
+import App from "./App";
 
-function HomePage() {
-  return (
-    <div>
-      <Header />
-    </div>
-  );
-}
-
-ReactDOM.render(<HomePage />, app);
+const root = createRoot(document.getElementById("root"));
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
 ```
+App.js:
+```js
+export default function Square() {
+  return <button className="square">X</button>;
+}
+```
+styles.css: any styles
 
-# Props
-- arguments that go into a component
+
+next run `npm install` to get dependencies. the following scripts are available:
+- `npm start` starts dev server
+- `npm run build` builds
+- `npm test` tests
+
+
+
+# component
+
+- component is defined as a function that returns html 
+- the component can have props (the state of the component) in an object (this case `value` holdes the value of props.value)
+- `{}` can escape html into javascript
 ``` jsx
-// pass in props as object
-function Header(props) {
-  return <h1>{props.title}</h1>;
-}
-
-// pass in props use object destructuring
-// use javascript in the html using { } inside the <></>
-function Header({ title }) {
-  return <h1>{title ? title : 'Default title'}</h1>;
-}
-
-// call component with props
-function HomePage() {
-  return (
-    <div>
-      <Header title="First title" />
-      <Header title="Second title" />
-    </div>
-  );
-}
-
-// output of js in html can be arrays of html
-// each array element must have key prop to uniquely identify each so react knows which to update in dom 
-function HomePage() {
-  const names = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton'];
-
-  return (
-    <div>
-      <Header title="Names List" />
-      <ul>
-        {names.map((name) => (
-          <li key={name}>{name}</li>
-        ))}
-      </ul>
-    </div>
-  );
+function Square({ value }) {
+  return <button className="square">{value}</button>;
 }
 ```
 
-# states
-- states are stored for each instance of the component in useState
+- Square can be used with
+```
+<Square value="1" />
+```
+
+# clicks
+
 ``` jsx
-// handle events like onClick, onSubmit, onChange
-function HomePage() {
+function Square({ value }) {
   function handleClick() {
-    console.log('increment like count');
+    console.log('clicked!');
   }
 
   return (
-    <div>
-      <button onClick={handleClick}>Like</button>
-    </div>
-  );
-}
-
-// handle state and updating states
-function HomePage() {
-  // [state value, function to update value]
-  // 0 is initial value of state value
-  const [likes, setLikes] = React.useState(0);
-
-  function handleClick() {
-    setLikes(likes + 1);
-  }
-
-  return (
-    <div>
-      <button onClick={handleClick}>Likes ({likes})</button>
-    </div>
+    <button
+      className="square"
+      onClick={handleClick}
+    >
+      {value}
+    </button>
   );
 }
 ```
 
-# package management
 
-### nvm
-- install nvm to control the version of npm [here](https://github.com/nvm-sh/nvm#installing-and-updating)
-- download nodejs (which include npm) from online
-- include nodejs version in .nvmrc file for nvm to know what npm to use. then run `nvm install` and `nvm use`
-```
-16.13.0
-```
+# state
 
-### npm
-- create empty package.json
-```
-{
-}
-```
-- install using npm
-```
-npm install react react-dom next
-```
-- now there is a `node_modules` folder which is the actual dependencies. never code or change this
-- `package.json` has dependencies outlined while `package-lock.json` locks in specific version for everything
-- now when people use `npm install`, the project knows exactly what to install
-
-- add dev mode to `package.json`
-``` json
-// package.json
-{
-"scripts": {
-    "dev": "next dev"
-  },
-  // "dependencies": {
-  //   "next": "^11.1.0",
-  //   "react": "^17.0.2",
-  //   "react-dom": "^17.0.2"
-  // }
-}
-```
-- run dev mode with `npm run dev` and see at [localhost:3000](http://localhost:3000/)
-- import what is needed and export function that is run first
-
-### next.js file system
-- make a `pages` folder with file `index.jsx` in it
+- `useState(x)` sets up the state with initial value of x
+- the state is stored in `value` 
+- the state (`value`) can be changed with `setValue()`
 ```jsx
 import { useState } from 'react';
-
-function Header({ title }) {
-  return <h1>{title ? title : 'Default title'}</h1>;
-}
-
-export default function HomePage() {
-  const names = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton'];
-  const [likes, setLikes] = useState(0);
+function Square({ initialValue }) {
+  const [value, setValue] = useState(initialValue);
 
   function handleClick() {
-    setLikes(likes + 1);
+    setValue('X');
   }
 
   return (
-    <div>
-      <Header title="Develop. Preview. Ship. 🚀" />
-      <ul>
-        {names.map((name) => (
-          <li key={name}>{name}</li>
-        ))}
-      </ul>
-
-      <button onClick={handleClick}>Like ({likes})</button>
-    </div>
+    <button
+      className="square"
+      onClick={handleClick}
+    >
+      {value}
+    </button>
   );
 }
 ```
 
-# link
-- client side navigation
-- fast and preloaded
-- make new folders under pages -> url-folder -> name.js which makes the url /url-folder/name
-- include link method
-```
-import Link from 'next/link';
-```
-- link within pages
-``` jsx
-<Link href="/">Back to home</Link>
-```
 
-# head
-- metadata
-``` jsx
-import Head from 'next/head';
-```
-``` jsx
-<Head>
-  <title>First Post</title>
-</Head>
-```
-
-# script
-- include 3rd party javascript code in nonblocking script tags
-``` jsx
-import Script from 'next/script';
-```
-``` jsx
-<Script
-  src="https://connect.facebook.net/en_US/sdk.js"
-  strategy="lazyOnload"
-  onLoad={() =>
-    console.log(`script loaded correctly, window.FB has been populated`)
-  }
-/>
-```
-
-# css modules
-- making a component with css best practice
-- in component folder, have compname.js with:
+# parent child state
+- when the parent and child need the childs state, instead store the state of the child in the parent
+- pass state into the child
 ```jsx
-import styles from './layout.module.css';
-
-export default function Layout({ children }) {
-  return <div className={styles.container}>{children}</div>;
-}
+function Square({ value, onSquareClick })
 ```
-- in component folder, have compname.module.css which will not clash with any other names automatically!:
-```css
-.container {
-  max-width: 36rem;
-  padding: 0 1rem;
-  margin: 3rem auto 6rem;
-}
-```
-
-# app.js
-- in pages -> _app.js
-``` jsx
-import '../styles/global.css';
-
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
-}
-```
-- have the css in styles -> global.css and only import here
-
-# sass
-- install with `npm install sass`
-
-# rendering
-- static rendering for fast and most used
-- server-side rendering when data data changes often
-- static generation with data can have partially rendered before getting data:
-- `getStaticProps` will run at build time in production
+- keep the state in the parent
 ```jsx
-import { getSortedPostsData } from '../lib/posts'
-
-export default function Home(props) { ... }
-
-export async function getStaticProps() {
-  // Get external data from the file system, API, DB, etc.
-  const data = getSortedPostsData();
-
-  // The value of the `props` key will be
-  //  passed to the `Home` component
-  return {
-    props: allPostsData
-  }
-}
-```
-- include functions for getting data from api or database in lib folder 
-```jsx
-import someDatabaseSDK from 'someDatabaseSDK'
-
-const databaseClient = someDatabaseSDK.createClient(...)
-
-export async function getSortedPostsData() {
-  // Instead of the file system,
-  // fetch post data from a database
-  return databaseClient.query('SELECT posts...')
-}
+const [square, setSquare] = useState(0);
+// handleClick calls setSquare
+<Square value={square} onSquareClick={handleClick} />
 ```
 
-- static paths with any name
-- under file `[id].js` id must come from a list of possible results that must be returned from `getStaticPaths()`
-```jsx
-// Returns an array that looks like this:
-// [
-//   {
-//     params: {
-//       id: 'ssg-ssr'
-//     }
-//   },
-//   {
-//     params: {
-//       id: 'pre-rendering'
-//     }
-//   }
-// ]
-export async function getStaticPaths() {
-  const paths = getAllPostIds();
-  return {
-    paths,
-    fallback: false,
-  };
-}
-```
-- so to make a path called /posts/<id> where <id> can be dynamic then you need to make a file in /pages/posts/[id].js that contains:
-  1. react component to render page
-  2. getStaticPaths that returns an array of possible ids
-  3. getStaticProps which gets data associated with id
+
