@@ -1,11 +1,21 @@
 # GO Basics
 
-
+- [outline](#outline)
+- [variables](#variables)
+- [control](#control)
+- [functions](#functions)
+- [string](#string)
+- [array](#array)
+- [slice](#slice)
+- [map](#map)
+- [OOP](#oop)
+- [go routines](#go-routines)
 
 - GO Playground: https://go.dev/play/
 - Go standard library: https://pkg.go.dev/std
 
-## Outline
+
+## outline
 - designed for large distributed systems
 ```go
 package main
@@ -20,9 +30,9 @@ func main() {
 }
 ```
 
-## Variables
+## variables
 - assignments (go will only compile if all variables are used)
-- types are `int`, `bool`, `float32`, string
+- types are `int`, `bool`, `float32`, `string`, `error`
 ```go
 var a int = 3
 var b = 2
@@ -31,7 +41,7 @@ var d int // default is 0
 var e, f int = -1, -2 // assign multiple
 ```
 
-## Loops
+## control
 - supports `break` and `continue`
 ```go
 // for loop
@@ -53,14 +63,167 @@ for i:=0; i<3 ; i++ {
 }
 ```
 
-## Functions
--
+## functions
 ```go
 func f(a int, b int) int {
   return a + b
 }
 
-func f(a, b int) (int,int) { // both a and b are int types
+// both a and b are int types
+func f(a, b int) (int,int) { 
   return a, b
 }
+
+// function that returns a (function that returns an int)
+func example() func() int {
+  var x int
+  return func() int {
+    x++
+    return x*x
+  }
+}
 ```
+
+## string
+```go
+// import "strings"
+
+// create string
+str := "hiTHERE"
+
+// lower case
+lowercaseStr := strings.ToLower(str)
+
+```
+
+## array
+- fixed space
+```go
+// create array of size 8
+a := [8]int{1,2,3,4,5,6,7,8}
+
+// 
+```
+
+## slice
+
+```go
+// create slice of size 3
+a := make([]string, 3)
+
+
+// append O(1)
+a := append(a,"tom")
+
+
+```
+
+## map
+```go
+// create map: string->int
+a := make(map[string]int)
+
+// assign
+a["strkey"] = 1
+
+// remove
+delete(a,"strkey")
+
+
+```
+
+
+## OOP
+```go
+// define a struct (acts as a contructor)
+type Person struct {
+    FirstName string
+    LastName  string
+    Age       int
+}
+
+
+// create a method for Person
+func (p *Person) FullName() string {
+    return p.FirstName + " " + p.LastName
+}
+
+// note that without the pointer, p is a coppy
+func (p Person) FullName() string {
+    return p.FirstName + " " + p.LastName
+}
+
+
+// create instance
+func main() {
+  
+  person := Person{
+      FirstName: "John",
+      LastName:  "Doe",
+      Age:       30,
+  }
+  fullName := person.FullName()
+
+}
+```
+
+
+# go routines
+```go
+// use go keyword
+func goroutines() {
+  for i:= 0; i< 10; i++ {
+    go fmt.Printf("go rountine")
+  }
+  fmt.Println("launched")
+}
+
+```
+
+- channels (unbuffered)
+```go
+
+// makes an int channel
+ch := make(chan int)
+
+// makes an int channel that cna hold 3 elements
+ch2 := make(chan int, 3)
+
+go func() {
+  i := 1
+  for {
+
+    // send value to channel (which blocks until someoen consumes from the channel)
+    ch <- i*i
+    i++
+  }
+}()
+
+for i:=0; i<10; i++ {
+
+  // receive value from a channel
+  value := <-ch
+
+  fmt.Printf(value)
+}
+
+
+// close channel
+close(ch)
+
+
+// function that takes channel which can only send ints
+func sendData(ch chan<- int, data int) {
+    ch <- data
+}
+sendData(ch,42)
+
+// function that takes channel that can only be read from
+func receiveData(ch <-chan int) int {
+    return <-ch
+}
+receiveData(ch)
+
+
+```
+
