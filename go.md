@@ -1,5 +1,7 @@
 # GO Basics
 
+
+
 - GO Playground: https://go.dev/play/
 - Go standard library: https://pkg.go.dev/std
 
@@ -8,16 +10,19 @@
 ```go
 package main
 
-import "fmt" // format package
+// import packages
+import (
+  "fmt"
+)
 
 func main() {
-	fmt.Println("Hello")
+  fmt.Println("Hello")
 }
 ```
 
 ## Variables
 - assignments (go will only compile if all variables are used)
-- types are `int`, `bool`, `float32`
+- types are `int`, `bool`, `float32`, string
 ```go
 var a int = 3
 var b = 2
