@@ -12,6 +12,7 @@
 - [Conda](python_environments.md)
 - [Webscraping](python_webscraping.md)
 - [Data Science](python_datascience.md)
+- [Neural Networks](python_neuralnetworks.md)
 
 # Systems
 - [Unix](unix.md)
