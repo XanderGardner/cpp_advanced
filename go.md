@@ -286,35 +286,20 @@ func goroutines() {
 
 - channels (unbuffered)
 ```go
-
 // makes an int channel
 ch := make(chan int)
 
 // makes an int channel that cna hold 3 elements
 ch2 := make(chan int, 3)
 
-go func() {
-  i := 1
-  for {
+// send value to channel (which blocks until someone consumes from the channel)
+ch <- i*i
 
-    // send value to channel (which blocks until someoen consumes from the channel)
-    ch <- i*i
-    i++
-  }
-}()
-
-for i:=0; i<10; i++ {
-
-  // receive value from a channel
-  value := <-ch
-
-  fmt.Printf(value)
-}
-
+// receive value from a channel
+value := <-ch
 
 // close channel
 close(ch)
-
 
 // function that takes channel which can only send ints
 func sendData(ch chan<- int, data int) {
@@ -327,7 +312,6 @@ func receiveData(ch <-chan int) int {
     return <-ch
 }
 receiveData(ch)
-
 
 ```
 
