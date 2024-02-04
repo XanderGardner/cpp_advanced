@@ -104,7 +104,7 @@ func example() func() int {
 - files `import "os"`
 ``` go
 // create file
-file, err := os.Open("file.go") # read access
+file, err := os.Open("file.go") // read access
 if err != nil {
   log.Fatal(err)
 }
@@ -172,6 +172,7 @@ a.Name
 // create string
 s := "hiTHERE"
 s := string(byte_slice) // create string from []byte type
+s := strconv.Itoa(123) // string from integer "123"
 
 // access
 len(s)
@@ -286,20 +287,21 @@ func goroutines() {
 
 - channels (unbuffered)
 ```go
-// makes an int channel
+// makes an int channel which can hold one int
 ch := make(chan int)
-
-// makes an int channel that cna hold 3 elements
-ch2 := make(chan int, 3)
 
 // send value to channel (which blocks until someone consumes from the channel)
 ch <- i*i
 
-// receive value from a channel
+// receive value from a channel (which blocks until someone sends to the channel)
 value := <-ch
+value, ok := <-ch // ok indicates if the channel is still open
 
 // close channel
 close(ch)
+
+// function that takes channel (can send or receive)
+func sumWorker(ch chan int) { }
 
 // function that takes channel which can only send ints
 func sendData(ch chan<- int, data int) {
@@ -313,5 +315,19 @@ func receiveData(ch <-chan int) int {
 }
 receiveData(ch)
 
+// loop over channel, which continues until the channel is empty and closed
+for item := range ch { }
 ```
 
+- channels (buffered)
+- only blocks sending when channel is full
+- only blocks receiving when channel is empty
+```go
+// makes an int channel that can hold 3 elements
+ch2 := make(chan int, 3)
+
+// can send multiple ints
+ch <- 1
+ch <- 2
+ch <- 3
+```
