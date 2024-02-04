@@ -8,6 +8,7 @@
 - [array](#array)
 - [slice](#slice)
 - [map](#map)
+- [sort](#sort)
 - [OOP](#oop)
 - [go routines](#go-routines)
 
@@ -90,10 +91,19 @@ func example() func() int {
 // import "strings"
 
 // create string
-str := "hiTHERE"
+s := "hiTHERE"
+s := string(byte_slice) # create string from []byte type
 
-// lower case
-lowercaseStr := strings.ToLower(str)
+// access
+len(s)
+s[3]
+s[3:5]
+
+// modify
+a := strings.ToLower(s) lower case
+
+// control
+for i, c := range s { }
 
 ```
 
@@ -130,7 +140,21 @@ a["strkey"] = 1
 // remove
 delete(a,"strkey")
 
+```
 
+
+## sort
+- `import "sort"`
+```go
+
+sort.Ints(numbers) # sorts array of ints
+sort.Strings(words) # sorts array of strings
+sort.Float64s(numbers) # sorts array of float64s
+
+// custom sort
+sort.Slice(names, func(i, j int) bool {
+  return names[i] < names[j]
+})
 ```
 
 
