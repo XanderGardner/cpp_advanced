@@ -1,20 +1,28 @@
 # GO Basics
 
+basics
 - [outline](#outline)
 - [variables](#variables)
 - [control](#control)
 - [functions](#functions)
+- [io](#io)
+
+ds
 - [string](#string)
 - [array](#array)
 - [slice](#slice)
 - [map](#map)
+
+algos
 - [sort](#sort)
+
+systems
 - [OOP](#oop)
 - [go routines](#go-routines)
 
+experiment
 - GO Playground: https://go.dev/play/
 - Go standard library: https://pkg.go.dev/std
-
 
 ## outline
 - designed for large distributed systems
@@ -63,6 +71,9 @@ Outerloop:
 for i:=0; i<3 ; i++ {
   break Outerloop
 }
+
+for i, c := range s { } // loop over items in string
+for i, item := range a { } // loop over items in array
 ```
 
 ## functions
@@ -86,13 +97,59 @@ func example() func() int {
 }
 ```
 
+## io
+
+- files `import "os"`
+``` go
+// create file
+file, err := os.Open("file.go") # read access
+if err != nil {
+	log.Fatal(err)
+}
+
+// read file all at once
+data := make([]byte, 0)
+count, err := file.Read(data)
+if err != nil {
+	log.Fatal(err)
+}
+
+// close file
+file.Close()
+
+```
+
+- reading files `import bufio`
+```go
+
+// line by line
+scanner := bufio.NewScanner(file)
+for scanner.Scan() { // scans to "\n"
+    scanner.Text() // retrieves current line
+}
+if scanner.Err() != nil {
+    fmt.Println(scanner.Err())
+}
+
+// word by word
+scanner := bufio.NewScanner(file)
+scanner.Split(bufio.ScanWords) // use to scan to spaces
+for scanner.Scan() {
+    scanner.Text() // retrieves current word
+}
+if scanner.Err() != nil {
+    fmt.Println(scanner.Err())
+}
+
+```
+
 ## string
 ```go
 // import "strings"
 
 // create string
 s := "hiTHERE"
-s := string(byte_slice) # create string from []byte type
+s := string(byte_slice) // create string from []byte type
 
 // access
 len(s)
@@ -100,11 +157,8 @@ s[3]
 s[3:5]
 
 // modify
-a := strings.ToLower(s) lower case
-
-// control
-for i, c := range s { }
-
+a := strings.ToLower(s) // lower case
+a := strings.Split(s, ",") // split into array of strings
 ```
 
 ## array
