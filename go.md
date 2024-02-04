@@ -8,6 +8,7 @@ basics
 - [io](#io)
 
 ds
+- [struct](#struct)
 - [string](#string)
 - [array](#array)
 - [slice](#slice)
@@ -143,6 +144,26 @@ if scanner.Err() != nil {
 }
 
 ```
+
+## struct
+
+```go
+// define
+type Person struct {
+  Name string
+  Age int
+}
+
+// create instance
+a := Person{
+  Name: "John",
+  Age: 30,
+}
+
+// access
+a.Name
+```
+
 
 ## string
 ```go
