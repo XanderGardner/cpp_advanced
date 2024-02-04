@@ -105,14 +105,14 @@ func example() func() int {
 // create file
 file, err := os.Open("file.go") # read access
 if err != nil {
-	log.Fatal(err)
+  log.Fatal(err)
 }
 
 // read file all at once
 data := make([]byte, 0)
 count, err := file.Read(data)
 if err != nil {
-	log.Fatal(err)
+  log.Fatal(err)
 }
 
 // close file
@@ -136,10 +136,10 @@ if scanner.Err() != nil {
 scanner := bufio.NewScanner(file)
 scanner.Split(bufio.ScanWords) // use to scan to spaces
 for scanner.Scan() {
-    scanner.Text() // retrieves current word
+  scanner.Text() // retrieves current word
 }
 if scanner.Err() != nil {
-    fmt.Println(scanner.Err())
+  fmt.Println(scanner.Err())
 }
 
 ```
@@ -160,14 +160,15 @@ s[3:5]
 // modify
 a := strings.ToLower(s) // lower case
 a := strings.Split(s, ",") // split into array of strings
-a := strings.Fields(s) // slits by white space
+a := strings.Fields(s) // splits by white space
+s := strings.Join(a, ", ") // joins array of strings
 ```
 
 ## array
 - fixed space
 ```go
 // create array of size 8
-a := [8]int{1,2,3,4,5,6,7,8}
+a := []int{1,2,3,4,5,6,7,8}
 
 // 
 ```
@@ -190,8 +191,9 @@ a := append(a,"tom")
 // create map: string->int
 a := make(map[string]int)
 
-// assign
-a["strkey"] = 1
+// access
+value, exists := m[key] // check
+a["strkey"] = 1 // assign
 
 // remove
 delete(a,"strkey")
