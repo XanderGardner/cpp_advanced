@@ -202,7 +202,7 @@ a := make([]string, 3)
 
 
 // append O(1)
-a := append(a,"tom")
+a = append(a,"tom")
 
 
 ```
