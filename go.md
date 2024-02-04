@@ -17,6 +17,7 @@
 
 ## outline
 - designed for large distributed systems
+- run with `go run filename`
 ```go
 package main
 
