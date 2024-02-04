@@ -74,6 +74,7 @@ for i:=0; i<3 ; i++ {
 
 for i, c := range s { } // loop over items in string
 for i, item := range a { } // loop over items in array
+for key, value := range myMap { } // loop over map items
 ```
 
 ## functions
