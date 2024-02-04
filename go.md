@@ -159,6 +159,7 @@ s[3:5]
 // modify
 a := strings.ToLower(s) // lower case
 a := strings.Split(s, ",") // split into array of strings
+a := strings.Fields(s) // slits by white space
 ```
 
 ## array
