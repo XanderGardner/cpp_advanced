@@ -28,38 +28,6 @@ import sqlite3
 con = sqlite3.connect("ssdfd.sqlite")
 df = pd.read_sql_query("SELECT * FROM tablename", con)
 ```
-### output
-
-- plotting
-```
-df.plot.line('TIME', "SIZE") # line
-df['colname'].hist() # histogram
-plt.scatter(x=df['col1'], y=df['col2'], alpha=0.1) # density plot
-```
-setting title, xlabel with axes
-```
-ax = df['colname'].hist()
-ax.set_xlabel("xlabel")
-ax.set_title("title")
-```
-
-- get dict
-``` python
-df.to_dict('index')
-# {'row1': {'col1': 1, 'col2': 0.5}, 'row2': {'col1': 2, 'col2': 0.75}}
-```
-
-- get numpy array (if all numbers)
-- otherwise numpy array will have some objects and stuff
-``` python
-a = df.to_numpy()
-```
-
-- get column as list
-``` python
-a['colname'].tolist()
-```
-
 
 ### read
 
@@ -89,6 +57,13 @@ df.iloc[14,1] # get row, col
 df.iloc[22:25] # multiple rows
 ```
 
+- stats
+```python
+
+# column sum
+df['colname'].sum()
+```
+
 ### update
 
 - adding data
@@ -102,6 +77,39 @@ df['new col'] = df['longitude'].apply(lambda x : 1 if x==-122.05 else 0)
 df = df.sort_values(by=['TIME'])
 ```
 
+### output
+
+- plotting
+```
+df.plot.line('TIME', "SIZE") # line
+df['colname'].hist() # histogram
+plt.scatter(x=df['col1'], y=df['col2'], alpha=0.1) # density plot
+```
+setting title, xlabel with axes
+```
+ax = df['colname'].hist()
+ax.set_xlabel("xlabel")
+ax.set_title("title")
+```
+
+- get dict
+``` python
+df.to_dict('index')
+# {'row1': {'col1': 1, 'col2': 0.5}, 'row2': {'col1': 2, 'col2': 0.75}}
+```
+
+- get numpy array (if all numbers)
+- otherwise numpy array will have some objects
+``` python
+a = df.to_numpy()
+```
+
+- get column as list
+``` python
+a['colname'].tolist()
+```
+
+
 # plt
 
 - import
@@ -114,9 +122,11 @@ import matplotlib.pyplot as plt
 ``` python
 plt.plot(alphas, num_occurances, label="num occurances")
 plt.plot(alphas, mean_returns, label="mean returns")
-plt.plot(alphas, total_returns, label="total returns")
-plt.plot(alphas, variance_returns, label="variance returns")
+
+# legend (from label)
 plt.legend()
+
+# title and axis
 plt.title("metrics vs alpha")
 plt.xlabel("alpha")
 plt.ylabel("metric")
