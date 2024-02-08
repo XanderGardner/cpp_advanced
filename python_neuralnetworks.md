@@ -40,6 +40,8 @@ x[0,2] = 17 # row 0, column 2
 x[:2, :] = 12 # for rows 0,1 (and for every column) set to 12
 x = x.reshape(3,4) # change shape to 3 rows, 4 columns (read like a book)
 a = torch.cat((x, y), dim=0) # concatenate along 0 axis (add rows)
+x.unsqueeze(0) # adds dimension [5,6,7] -> [[5,6,7]]
+a = torch.cat((x, y.unsqueeze(0)), dim=0) # concatenate to end
 
 ```
 
