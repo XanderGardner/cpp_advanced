@@ -20,6 +20,8 @@ algos
 systems
 - [OOP](#oop)
 - [go routines](#go-routines)
+- [channels](#channels)
+- [locks](#locks)
 
 experiment
 - GO Playground: https://go.dev/play/
@@ -104,25 +106,18 @@ func example() func() int {
 - files `import "os"`
 ``` go
 // create file
-file, err := os.Open("file.go") // read access
-if err != nil {
-  log.Fatal(err)
-}
-
-// read file all at once
-data := make([]byte, 0)
-count, err := file.Read(data)
-if err != nil {
-  log.Fatal(err)
-}
+file, err := os.Create(filename) // create new file
+file, err := os.Open(filename) // read access
 
 // close file
 file.Close()
 
-```
+// read files by bytes
+data := make([]byte, 1000)
+count, err := file.Read(data)
 
-- reading files `import bufio`
-```go
+// read file all at once to bytes
+data, err := os.ReadFile(filename)
 
 // line by line
 scanner := bufio.NewScanner(file)
@@ -141,6 +136,29 @@ for scanner.Scan() {
 }
 if scanner.Err() != nil {
   fmt.Println(scanner.Err())
+}
+
+```
+
+- using json: `import "encoding/json"`
+```go
+
+// writting
+file, err := os.Open("file.go") // open file
+enc := json.NewEncoder(file) // create encoder
+// encode a struct to json, give pointer to struct
+err := enc.Encode(&str) 
+
+
+// reading
+file, err := os.Open("file.go") // open file
+decoder := json.NewDecoder(file) // create decoder
+var person PersonType // struct variable to store
+// decode all structs until error
+err = decoder.Decode(&person)
+for err != io.EOF {
+
+  err = decoder.Decode(&person)
 }
 
 ```
@@ -173,6 +191,7 @@ a.Name
 s := "hiTHERE"
 s := string(byte_slice) // create string from []byte type
 s := strconv.Itoa(123) // string from integer "123"
+i, err := strconv.Atoi("-42") // int from string
 
 // access
 len(s)
@@ -191,16 +210,27 @@ s := strings.Join(a, ", ") // joins array of strings
 ```go
 // create array of size 8
 a := []int{1,2,3,4,5,6,7,8}
-
-// 
 ```
 
 ## slice
-
+- dynamic array
 ```go
+//// create
+
 // create slice of size 3
 a := make([]string, 3)
 
+// slice of empty slices
+a := make([][]int, numRows)
+
+// slice of slices with set rows,column 
+a := make([][]int, numRows)
+for i, _ := range a {
+    a[i] = make([]int, numCols)
+}
+
+
+//// update
 
 // append O(1)
 a = append(a,"tom")
@@ -285,6 +315,8 @@ func goroutines() {
 
 ```
 
+# channels
+
 - channels (unbuffered)
 ```go
 // makes an int channel which can hold one int
@@ -330,4 +362,67 @@ ch2 := make(chan int, 3)
 ch <- 1
 ch <- 2
 ch <- 3
+```
+
+- wait on multiple channels
+```go
+
+select {
+  case a := <- ch1:
+    // do using a
+  case b := <- ch2:
+    // do using b
+  case default:
+    time.Sleep(5 * time.Second) // timeout
+}
+
+```
+
+
+# locks
+- limit access to a critical section
+
+- mutex: lock a struct
+```go
+
+import "sync"
+
+type Account struct {
+  balance int
+  mu sync.Mutex
+}
+
+func (a *Account) Check() int {
+  // block access to a in all other threads
+  a.mu.Lock()
+  defer a.mu.Unlock()
+
+  return a.balance
+}
+```
+
+- read write locks: multiple threads can have access to reads
+```go
+ 
+
+type Account struct {
+  balance int
+  rwLock sync.RWMutex // read write lock
+}
+
+func (a *Account) Check() int {
+  a.rwLock.RLock() // read lock
+  defer a.rwLock.RUnlock()
+
+  return a.balance
+}
+
+func (a *Account) Check() int {
+  a.rwLock.Lock() // read and write lock
+  defer a.rwLock.Unlock()
+
+  return a.balance
+}
+
+
 ```
