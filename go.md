@@ -306,12 +306,15 @@ func main() {
 # go routines
 ```go
 // use go keyword
-func goroutines() {
-  for i:= 0; i< 10; i++ {
-    go fmt.Printf("go rountine")
-  }
-  fmt.Println("launched")
+for i:= 0; i< 10; i++ {
+  go fmt.Printf("go rountine")
 }
+fmt.Println("launched")
+
+// anonymous function
+go func(a string) {
+  fmt.Println(a)
+}("hello")
 
 ```
 
