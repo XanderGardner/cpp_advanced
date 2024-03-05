@@ -1,13 +1,22 @@
 
 Basics
+- [language use](#language-use)
 - [throw errors](#throw-errors)
 - [primitive data types](#primitive-data-types)
 - [object](#object)
 - [array](#array)
 
+# language use
+
+- versions of javascript are ES5, ES6, ES7, ...
+- original javascript made for browsers to run
+- node.js allows computer to run javascript (for example: allows server side programming)
+- to go to older version: transpile with a transpiler such as babel
+
 
 # throw errors
 
+- throw errors
 ```javascript
 // throw an error
 throw new Error("Cannot divide by zero");
@@ -48,7 +57,7 @@ let b = true;
 ////// null //////
 let s = null
 
-////// undefined (uninitialized) //////
+////// undefined //////
 let x;
 
 ```
