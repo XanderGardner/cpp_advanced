@@ -167,7 +167,7 @@ s_new = "".join(s.split())
 s_new = s.replace(" ", "")
 
 # split based on character
-s_new = s.split(",")
+a = s.split(",")
 
 # check if is digit
 "3".isdigit() # True
