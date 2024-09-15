@@ -21,9 +21,10 @@ Collections
 - [Triple](#triple)
 - [ArrayDeque](#arraydeque)
 
-Ordered Collections
+More Collections
 - [PriorityQueue](#priorityqueue)
-- [TreeSet](#treeset)
+- [Set](#set)
+- [Map](#map)
 
 Functional
 - [conditional expressions](#conditional-expressions)
@@ -33,8 +34,6 @@ Functional
 Advanced Uses
 - [lambdas with receivers](#lambdas-with-receivers)
 - [scope functions](#scope-functions)
-
-
 
 # read input
 
@@ -377,13 +376,68 @@ a.isNotEmpty()
 
 // custom priority
 // (since comparator is a functional interface, we use a lambda)
-val pairComparator = Comparator<Pair<Int, String>> { pair1, pair2 ->
+val pairComparator: Comparator<Pair<Int, String>> = Comparator<Pair<Int, String>> { pair1, pair2 ->
         ...
     }
-val a = PriorityQueue<Int>(pairComparator)
+val a = PriorityQueue<Pair<Int, String>>(pairComparator)
 ```
 
-# Treeset
+# Set
+- `MutableSet` extends `Set` by making it mutable
+- implementations are `HashSet`, `LinkedHashSet`, and `TreeSet`
+```kotlin
+import java.util.HashSet
+import java.util.LinkedHashSet
+import java.util.TreeSet
+
+// create
+val a = HashSet<Int>() // hashmap
+val a = LinkedHashSet<Int>()  // maintains insertion order
+val a = TreeSet<Int>() // red black tree
+
+val a = hashSetOf(1,2,3)
+val a = linkedHashSetOf(1,2,3)
+val a = treeSetOf(1,2,3)
+
+// add O(logn)
+a.add(3)
+
+// remove O(logn)
+a.remove(3)
+
+// contains O(logn)
+a.contains(3)
+
+// traversal O(n)
+for (item in a) { ... } // ordered
+
+// add first/last O(1)
+a.first()
+a.last()
+
+// size
+a.size
+```
+
+# Map
+- `MutableMap` extends `Map` by making it mutable
+- implementations are `HashMap`, `LinkedHashMap`, and `TreeMap`
+```kotlin
+import java.util.HashMap
+import java.util.LinkedHashMap
+import java.util.TreeMap
+
+// create
+val a = HashMap<String, Int>() // hashmap
+val a = LinkedHashMap<String, Int>() // maintains insertion order
+val a = TreeMap<String, Int>() // red black tree
+
+// set
+a["one"] = 1
+
+// access
+a["two"]
+```
 
 
 
