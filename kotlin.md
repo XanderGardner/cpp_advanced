@@ -4,6 +4,7 @@ Basics
 - [read input](#read-input)
 - [exceptions](#exceptions)
 - [random](#random)
+- [math](#math)
 - [casting](#casting)
 
 Basic Data Types
@@ -15,8 +16,7 @@ Basic Data Types
 
 Collections
 - [Array](#array)
-- [List](#list)
-- [MutableList](#mutablelist)
+- [ArrayList](#arraylist)
 - [Pair](#pair)
 - [Triple](#triple)
 - [ArrayDeque](#arraydeque)
@@ -94,6 +94,12 @@ val a = Random.nextDouble(1.0, 10.0)
 
 // random item from list
 val a = list.random()
+```
+
+# math
+```kotlin
+maxOf(a,b)
+minOf(a,b)
 ```
 
 # casting
@@ -249,25 +255,13 @@ array.sortWith { a, b ->
 // create
 val a: IntArray = intArrayOf(5, 10, 15, 20)
 val a: DoubleArray = doubleArrayOf(5.0, 10.0, 15.0, 20.0)
+
+val a = IntArray(2) // size 2, 0's
+
 ```
 
-# List
-- immutable
-- fixed size
-- interface
-```kotlin
-// create
-val a: List<Int> = listOf(1, 2, 3, 4, 5) // explicit
-
-// access
-a[2]
-
-// length
-val l = a.size
-```
-
-# MutableList
-- mutable
+# ArrayList
+- `MutableList` implements the `List` and provides mutability
 - variable size
 - interface which extends List
 - implementations of this interface inlude:
@@ -275,7 +269,8 @@ val l = a.size
   - `LinkedList`
 ```kotlin
 // create
-val a: MutableList<Int> = mutableListOf(1, 2, 3, 4, 5) // explicit
+val a = ArrayList<Int>()
+val a: ArrayList<Int> = arrayListOf(1, 2, 3, 4, 5)
 
 // access
 a[2]
@@ -287,6 +282,9 @@ a += c // .addAll(c)
 
 // length
 val l = a.size
+
+// cast
+a.toIntArray() // to IntArray
 
 // sorting
 a.sort() // inplace
@@ -300,6 +298,10 @@ array.sortWith { a, b ->
       result
   }
 }
+```
+- 2d arrays
+```kotlin
+val a = Array(numrows) { IntArray(numcols) }
 ```
 
 # Pair
