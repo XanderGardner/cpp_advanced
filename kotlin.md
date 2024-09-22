@@ -104,8 +104,11 @@ minOf(a,b)
 
 # casting
 
-- smart casting will change the type to not be nullable
 ```kotlin
+// get runtime type of variable
+val b = a::class // b is of type class reference
+
+// smart casting will change the type to not be nullable
 val s: String? = null
 if (s != null) {
     println(s.toUpperCase()) // s is of type String here
@@ -226,6 +229,7 @@ val s = a.toString()
 - mutable
 - fixed size
 - concrete class
+- backed by java array
 ```kotlin
 // create
 val a: Array<Int> = arrayOf(1, 2, 3, 4, 5) // explicit
@@ -236,6 +240,10 @@ a[2] = 5
 
 // length
 val l = a.size
+
+// cast to list (ArrayList at runtime)
+val b = a.toList() // deepcopy
+val b = a.asList() // linked to original array
 
 // sorting
 a.sort() // inplace
@@ -309,10 +317,14 @@ val a = Array(numrows) { IntArray(numcols) }
 ```kotlin
 // create
 val a: Pair<Int, String> = Pair(1, "one")
+val a = 1 to "one"
 
 // get
 val first = a.first
 val second = a.second
+
+// destructuring
+val (d,e) = a
 ```
 
 # Triple
@@ -325,6 +337,9 @@ val a: Triple<Int, String, Double> = Triple(1, "one", 1.0)
 val first = a.first
 val second = a.second
 val third = a.third
+
+// destructuring
+val (d,e,f) = a
 ```
 
 # ArrayDeque
@@ -361,12 +376,15 @@ a.removeFirst()
 ```kotlin
 // import
 import java.util.PriorityQueue
+import java.util.Comparator
 
 // create (min heap by default)
 val a = PriorityQueue<Int>()
+val a = PriorityQueue<Int>(Comparator.reverseOrder()) // max heap
 
 // add
 a.add(5)
+a.addAll(array)
 
 // pop
 val b: Int = a.poll()
@@ -376,8 +394,12 @@ a.size
 a.isEmpty()
 a.isNotEmpty()
 
-// custom priority
-// (since comparator is a functional interface, we use a lambda)
+// custom priority with compareBy
+val comp = compareBy<Person> { it.age } // simple arg
+val comp = compareBy<Person>({ it.age }, { it.name }) // many args
+val a = PriorityQueue<Triple<Int,Int,Int>>(comp) 
+
+// custom priority(since comparator is a functional interface, we use a lambda)
 val pairComparator: Comparator<Pair<Int, String>> = Comparator<Pair<Int, String>> { pair1, pair2 ->
         ...
     }
@@ -401,6 +423,8 @@ val a = hashSetOf(1,2,3)
 val a = linkedHashSetOf(1,2,3)
 val a = treeSetOf(1,2,3)
 
+val a = array.toHashSet()
+
 // add O(logn)
 a.add(3)
 
@@ -408,6 +432,7 @@ a.add(3)
 a.remove(3)
 
 // contains O(logn)
+3 in a
 a.contains(3)
 
 // traversal O(n)
