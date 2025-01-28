@@ -42,6 +42,7 @@ Node Based
   - [DFS](#graph-dfs)
   - [BFS](#graph-bfs)
   - [topological sort](#topological-sort)
+    - [khans algorithm](#khans-algorithm)
   - [minimum spanning tree](#minimum-spanning-tree)
 
 Range Queries
@@ -58,20 +59,25 @@ Algorithms
 - [Searching](#searching)
 - [Sorting](#sorting)
 - [Dynamic Programming](#dynamic-programming)
-  - [bitmasking](#bitmasking)
+- [binary](#binary)
+  - [xor](#xor)
+- [bitmasking](#bitmasking)
 
 Python Techniques
+- [Loop Else](#loop-else)
 - [Nested Functions](#nested-functions)
 - [Enumerate](#enumerate)
 - [Comparing Objects](#comparing-objects)
 - [Map Function](#map-function)
 - [Filter Function](#filter-function)
 - [Zip Function](#zip-function)
+- [All function](#all-function)
 
 Math
 - [Operations](#operations)
 - [Sum Sequence](#sum-sequence)
 - [Combination](#combinations)
+- [Permutations](#permutations)
 
 Other Guides
 - [Time Complexity](#time-complexity)
@@ -132,23 +138,29 @@ z = random.choice([1,3,4]) # random element from list
 import sys
 maxint = sys.maxsize # sys.maxint for versions before python3
 minint = -sys.maxsize-1
+
+a = float('inf') # positive infinity
+b = float('-inf') # negatie infinity
 ```
 
 # char
 - character
 ```python
-# get ascii code of character
-code = ord('A') 
 
-# check if uppercase
-'A'.isupper()
+# character index
+f_index = 'f' - 'a' # same as ord('f')-ord('a')
 
-# check alpha numerical
-'y'.isalnum()
+# converting
+code = ord('A') # char -> ascii code
+c = chr(code) # ascii code -> char
 
 # convert to lower or uppercase
 'A'.lower()
 'a'.upper()
+
+# properties of character
+'A'.isupper() # check if uppercase
+'y'.isalnum() # check alpha numerical
 ```
 
 # str
@@ -260,12 +272,9 @@ heapq.heappush(a, 6)
 
 # pop
 heapq.heappop(a)
-```
 
-- use tuples to sort based on index 0
-``` python
-a = [(1, "a"), (5, "d")]
-heapq.heapify(a)
+# peak
+a[0]
 ```
 
 # SortedList
@@ -294,12 +303,14 @@ a.index(5)
 ```
 
 # set
-- uses hash table w/ linked list
+- implemented under the hood using a hash table w/ linked list
 ``` python
 a = set([2,1,3])
 print(1 in set)
 a.add(4)
 a.remove(4)
+
+a.update([1,2,3])
 ```
 
 # frozenset
@@ -541,6 +552,22 @@ result = topological_sort(graph)
 print(result)  # Output: ['A', 'C', 'F', 'B', 'E', 'D']
 ```
 
+# khans algorithm
+- khan's algorithm for Topological Sorting is a method used to order the vertices of a directed graph in a linear order such that for every directed edge from vertex A to vertex B, A comes before B in the order
+```python
+# 1. find the indegree of all nodes
+
+# 2. maintain list of nodes w/ indegree of 0
+
+# 3. when that there are nodes w/ indegree of 0:
+
+  # process node here (processed topologically)
+
+  # pop one of the nodes w/ indegree of 0
+  # for each neighbor, decrease indegree by 1 ("remove the edge")
+    # enqueue if new indegree is 0
+```
+
 # minimum spanning tree
 - prim's algorithm:
 - Initialize a tree with a single vertex, chosen arbitrarily from the graph.
@@ -685,27 +712,16 @@ def get_z(s):
 import bisect
 
 # [1,3,5,5,6] bisect_left is 2, bisect_right is 4 based on same elements present
-
 def search(self, nums, target):
   index = bisect.bisect_left(nums, target)
   return index if index < len(nums) and nums[index] == target else -1
 ```
 
-- implement binary search
-``` python 
-# returns index of x in arr if present, else -1
-def binary_search(arr, low, high, x):
-    if high < low:
-      return -1 # element not present
-    
-    mid = (high + low) // 2
-    if arr[mid] == x:
-        return mid
-    elif arr[mid] > x:
-        return binary_search(arr, low, mid - 1, x)
-    else:
-        return binary_search(arr, mid + 1, high, x)
-```
+- implement binary search:
+  - Left should maintain “unknown” (left = k+1)
+  - Right should maintain “always a worst case possible option” (right = k)
+  - Left + (right-left)//2 always will check the unknown
+
 
 # Sorting
 - Selection: repeatedly find smallest w/ linear search
@@ -717,16 +733,15 @@ def binary_search(arr, low, high, x):
 ``` python
 def sortCmp(e):
   return len(e)
-  
-a = ['ab', 'a', 'df', 'sdf']
 
-# a.sort()
+# sort inplace
 a.sort()
 a.sort(reverse=True, key=sortCmp)
+a.sort(reverse=True, key=lambda x: len(x))
 
-# sorted(a) doesn't mutate
+# sort without mutating original array
 b = sorted(a)
-b = sorted(a, key=sortCmp, reverse=True)
+b = sorted(a, reverse=True, key=lambda x: len(x))
 ```
 
 # Dynamic Programming
@@ -772,7 +787,7 @@ def dp(i, owned_state):
 return dp(0, False)
 ```
 
-### bitmasking
+# binary
 - 0 is false, numbers are true. Bits can be manipulated to work with subsets
 ```python
 # basics
@@ -788,10 +803,19 @@ x ^ (1 << k)  # invert kth bit of x
 a = str(bin(x)) # get binary string "0b101101" ("0b" prefix always attached)
 str(bin(x))[2:].count("1") # number of set bits
 
+num = int("101100", 2) # int from binary string
+
 # goes through all subsets of n elements
 for s in range(1<<n):
   print(s)
 ```
+
+### xor
+Notably, for the xor operator: 
+- order doesn’t matter (if there are >= 1 xor operations)
+- equals 1 if there are an odd number of ones
+
+# bitmasking
 - bitmasking converts permutations (n!) to subsets (n*2^n) in dynamic programming. ex: elevator has max weight x. n people each with different weights travel up on the elevator. find the min # of trips.
 ``` cpp
 # best subset has a memoized pair representing: 1. the number of rides to get everyone up, and 2. the size of the last elevator ride
@@ -816,6 +840,16 @@ for s in range(1<<n):
         option[1] = weight[p];
 
       best[s] = min(best[s], option);
+```
+
+# Loop Else
+- else block at the end of a loop is run when loop terminates w/out break
+```python
+for i in range(n):
+  if i > x:
+    break
+else:
+  print("reached the end of the loop")
 ```
 
 # Nested Functions
@@ -873,6 +907,12 @@ filter(odd, [1,2,3,4]) # [1,3]
 zip([1,2,3],[4,5,6],[7,8,9]) # [(1,4,7),(2,5,8),(3,6,9)]
 ```
 
+# All Function
+- concise way to check if all values in list meet condition
+```
+all_positive = all(x >= x for x in req)
+``` 
+
 # Sum Sequence
 - n: number of numbers in sequence
 - a: first number in sequence
@@ -892,9 +932,30 @@ math.log(50,3) # base 3
 
 # Combinations
 - n choose k
-```
+- Note: number of ways to choose up to x numbers:
+  - requires iterating i from 0 to x and doing n choose i
+```python
+# number of combinations
 import math
 math.comb(n, k)
+
+# find all combinations (of size 2) from a list
+# (Unique based on position)
+# must use a set to remove duplicates in non-unique elements
+from itertools import combinations
+comb = combinations([1, 2, 3], 2)
+
+# (Replacable)
+from itertools import combinations_with_replacement 
+comb = combinations_with_replacement([1, 2, 3], 2) 
+```
+
+# Permutations
+- ways of ordering a list
+``` python
+# find all permutations from a list O(n!)
+from itertools import permutations 
+permutations(a)
 ```
 
 # Time Complexity
