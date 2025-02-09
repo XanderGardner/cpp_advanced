@@ -78,6 +78,7 @@ Math
 - [Sum Sequence](#sum-sequence)
 - [Combination](#combinations)
 - [Permutations](#permutations)
+- [Sieve of Eratosthenes](#sieve-of-eratosthenes)
 
 Other Guides
 - [Time Complexity](#time-complexity)
@@ -956,6 +957,27 @@ comb = combinations_with_replacement([1, 2, 3], 2)
 # find all permutations from a list O(n!)
 from itertools import permutations 
 permutations(a)
+```
+
+# Sieve of Eratosthenes
+- find all primes up to n in O(nlog(logn))
+- The reason for these two are the same:
+  - The outerloop only goes p up to sqrt(n)
+  - The innerloop starts at p*p for marking numbers that are not prime
+  - The reason is because invariant -> numbers below p*p have been marked by previous primes that show up "p times"
+
+```
+prime = [True for i in range(n+1)]
+
+p = 2
+while (p * p <= n):
+  # If prime[p] is still True, then it is a prime
+  if (prime[p] == True):
+
+      # Update all multiples of p
+      for i in range(p * p, n+1, p):
+          prime[i] = False
+  p += 1
 ```
 
 # Time Complexity
