@@ -79,6 +79,7 @@ Math
 - [Combination](#combinations)
 - [Permutations](#permutations)
 - [Sieve of Eratosthenes](#sieve-of-eratosthenes)
+- [Modular Arithmetic](#modular-arithmetic)
 
 Other Guides
 - [Time Complexity](#time-complexity)
@@ -978,6 +979,15 @@ while (p * p <= n):
       for i in range(p * p, n+1, p):
           prime[i] = False
   p += 1
+```
+
+# Modular Arithmetic
+```
+# (a+b) % m 
+# (a % m + b % m) % m
+
+# (a*b) % m
+# (a % m * b % m) % m
 ```
 
 # Time Complexity
